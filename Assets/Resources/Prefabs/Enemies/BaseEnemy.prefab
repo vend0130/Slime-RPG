@@ -77,6 +77,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyComponent: {fileID: 2867768653293221271}
+  _animator: {fileID: 0}
+  _damage: 2
+  _cooldown: 1
   _distanceToAttack: 1.3
 --- !u!1 &7136667093272866024
 GameObject:

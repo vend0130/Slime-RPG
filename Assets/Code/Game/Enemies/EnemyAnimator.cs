@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Code.Game.Enemies
 {
@@ -6,6 +7,8 @@ namespace Code.Game.Enemies
     {
         [SerializeField] private Animator _animator;
 
+        public event Action OnAttackHandler;
+        
         private readonly int _move = Animator.StringToHash("Move");
         private readonly int _attack = Animator.StringToHash("Attack");
 
@@ -14,5 +17,9 @@ namespace Code.Game.Enemies
 
         public void Attack() =>
             _animator.SetTrigger(_attack);
+
+        //animation event
+        public void OnAttack() => 
+            OnAttackHandler?.Invoke();
     }
 }

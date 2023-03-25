@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DefaultEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 7432879916796402843, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 2243040629551774925}
     m_RemovedComponents: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 9166469945797961150, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
