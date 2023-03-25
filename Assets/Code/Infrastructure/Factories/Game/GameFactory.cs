@@ -12,11 +12,11 @@ namespace Code.Infrastructure.Factories.Game
     public class GameFactory : IGameFactory
     {
         private const string SpheresParentName = "Spheres";
-        
+
         private readonly IAssetsProvider _assetsProvider;
         private readonly IEnemiesPoolable _enemiesPool;
         private readonly IUIFactory _uiFactory;
-        private readonly Vector3 _spawnPoint = new Vector3(-3f, 0f, 0f);
+        private readonly Vector3 _spawnPoint = new Vector3(-3.25f, 0f, 0f);
 
         private List<SphereMove> _spheres;
         private Transform _parentForSpheres;

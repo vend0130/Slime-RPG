@@ -7,7 +7,6 @@ namespace Code.Game.Enemies
     {
         [SerializeField] private EnemyComponent _enemyComponent;
         [SerializeField] private EnemyAnimator _animator;
-        [SerializeField] private float _damage = 25f;
         [SerializeField] private float _cooldown = 1f;
         [SerializeField] private float _distanceToAttack = 1.3f;
 
@@ -17,6 +16,7 @@ namespace Code.Game.Enemies
         private const string HeroLayerName = "Hero";
         private readonly Collider[] _hits = new Collider[1];
 
+        private float _damage;
         private float _timeNextAttack;
         private Transform _target;
         private int _layerMask;
@@ -48,6 +48,9 @@ namespace Code.Game.Enemies
             _enemyComponent.SetTargetHandler -= SetTarget;
             _animator.OnAttackHandler -= OnAttack;
         }
+
+        public void ChangeDamage(float damage) =>
+            _damage = damage;
 
         private void SetTarget(Transform target) =>
             _target = target;

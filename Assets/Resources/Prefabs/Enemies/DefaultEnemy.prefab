@@ -8,6 +8,34 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8123864665897460545, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
+      propertyPath: _offset.y
+      value: 2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 473727241135313851, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 473727241135313851, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 473727241135313851, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1883579232367362698, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1883579232367362698, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1883579232367362698, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
+      propertyPath: m_Color.r
+      value: 0.745283
+      objectReference: {fileID: 0}
     - target: {fileID: 3797276851896744049, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -54,12 +82,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5518777984627368109, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
       propertyPath: _speed
-      value: 2.4
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 5518777984627368109, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
       propertyPath: _animator
       value: 
       objectReference: {fileID: 2243040629551774925}
+    - target: {fileID: 5518777984627368109, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5798245858500557009, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
       propertyPath: m_Name
       value: DefaultEnemy

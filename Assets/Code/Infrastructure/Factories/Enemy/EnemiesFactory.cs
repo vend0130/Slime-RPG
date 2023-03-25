@@ -2,6 +2,7 @@
 using Code.Data.Level;
 using Code.Game.Enemies;
 using Code.Infrastructure.Factories.AssetsManagement;
+using Code.Infrastructure.Factories.UI;
 using UnityEngine;
 
 namespace Code.Infrastructure.Factories.Enemy
@@ -12,6 +13,7 @@ namespace Code.Infrastructure.Factories.Enemy
         private const string WaveName = "Wave";
 
         private readonly IAssetsProvider _assetsProvider;
+        private readonly IUIFactory _uiFactory;
 
         private List<List<EnemyComponent>> _wavesEnemies;
         private List<EnemyComponent> _currentWaveEnemies;
@@ -24,8 +26,11 @@ namespace Code.Infrastructure.Factories.Enemy
         private EnemiesSpawnPoint _spawnPoint;
         private Vector3 _nextSpawnPoint;
 
-        public EnemiesFactory(IAssetsProvider assetsProvider) =>
+        public EnemiesFactory(IAssetsProvider assetsProvider, IUIFactory uiFactory)
+        {
             _assetsProvider = assetsProvider;
+            _uiFactory = uiFactory;
+        }
 
         public void InitLevel(EnemiesSpawnPoint spawnPoint, LevelConfig levelConfig)
         {
@@ -49,24 +54,38 @@ namespace Code.Infrastructure.Factories.Enemy
         public void Create(Transform target)
         {
             for (int i = 0; i < _levelConfig.Waves.Length; i++)
-            {
-                Transform waveParent = new GameObject($"{WaveName}_{i}").transform;
-                waveParent.SetParent(_parent);
+                CreateWave(i);
+        }
 
-                List<EnemyComponent> enemies = new List<EnemyComponent>(_levelConfig.Waves[i].EnemiesCount);
+        private void CreateWave(int index)
+        {
+            Transform waveParent = new GameObject($"{WaveName}_{index}").transform;
+            waveParent.SetParent(_parent);
 
-                for (int j = 0; j < _levelConfig.Waves[i].EnemiesCount; j++)
-                {
-                    Vector3 position = GetSpawnPoint();
-                    GameObject enemy = _assetsProvider.Instantiate(_prefab, position, waveParent);
-                    enemy.SetActive(false);
+            List<EnemyComponent> enemies = new List<EnemyComponent>(_levelConfig.Waves[index].EnemiesCount);
 
-                    enemies.Add(enemy.GetComponent<EnemyComponent>());
-                }
+            for (int j = 0; j < _levelConfig.Waves[index].EnemiesCount; j++)
+                CreateEnemy(enemies, waveParent);
 
-                _wavesEnemies.Add(enemies);
-                _nextSpawnPoint.x += _spawnPoint.DistanceBetweenWave;
-            }
+            _wavesEnemies.Add(enemies);
+            _nextSpawnPoint.x += _spawnPoint.DistanceBetweenWave;
+        }
+
+        private void CreateEnemy(List<EnemyComponent> enemies, Transform waveParent)
+        {
+            Vector3 position = GetSpawnPoint();
+            GameObject enemy = _assetsProvider.Instantiate(_prefab, position, waveParent);
+            enemy.SetActive(false);
+
+            enemy
+                .GetComponent<EnemyHealth>()
+                .Init(_uiFactory, _levelConfig.Waves[_currentWave].EnemiesHp);
+
+            enemy
+                .GetComponent<EnemyAttack>()
+                .ChangeDamage(_levelConfig.Waves[_currentWave].EnemiesDamage);
+
+            enemies.Add(enemy.GetComponent<EnemyComponent>());
         }
 
         private Vector3 GetSpawnPoint()
