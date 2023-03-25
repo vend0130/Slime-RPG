@@ -5,14 +5,14 @@ using UnityEngine.SceneManagement;
 
 namespace Code.Infrastructure.Services.LoadScene
 {
-    public class LoaderSceneService : ILoaderScene, IDisposable
+    public class LoadSceneService : ILoaderScene, IDisposable
     {
         private readonly ICurtain _curtain;
         private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
 
         private bool _firstLoadIsEnded;
 
-        public LoaderSceneService(ICurtain curtain) =>
+        public LoadSceneService(ICurtain curtain) =>
             _curtain = curtain;
 
         public void Dispose()
