@@ -1,10 +1,12 @@
-﻿using Code.Infrastructure.Services.LoadScene;
+﻿using Code.Infrastructure.Factories.AssetsManagement;
+using Code.Infrastructure.Factories.Enemy;
+using Code.Infrastructure.Services.LoadScene;
 using Code.Infrastructure.StateMachine;
 using Code.Infrastructure.StateMachine.States;
 using UnityEngine;
 using Zenject;
 
-namespace Code.Infrastructure.Root
+namespace Code.Infrastructure.Root.Boot
 {
     public class BootInstaller : MonoInstaller, IInitializable
     {
@@ -16,13 +18,22 @@ namespace Code.Infrastructure.Root
             BindStateMachine();
             BindLoaderScene();
 
+            BindFactories();
+
             Container.BindInterfacesTo<BootInstaller>().FromInstance(this).AsSingle();
+        }
+
+        private void BindFactories()
+        {
+            Container.Bind<IAssetsProvider>().To<AssetsProvider>().AsSingle();
+            Container.Bind<IEnemyFactory>().To<EnemyFactory>().AsSingle();
         }
 
         private void BindStateMachine()
         {
             Container.Bind<IGameStateMachine>().To<GameStateMachine>().AsSingle();
             Container.Bind<LoadLevelState>().AsSingle();
+            Container.Bind<GameLoopState>().AsSingle();
         }
 
         private void BindLoaderScene()
