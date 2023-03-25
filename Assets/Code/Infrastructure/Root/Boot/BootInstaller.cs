@@ -26,7 +26,7 @@ namespace Code.Infrastructure.Root.Boot
         private void BindFactories()
         {
             Container.Bind<IAssetsProvider>().To<AssetsProvider>().AsSingle();
-            Container.Bind<IEnemyFactory>().To<EnemyFactory>().AsSingle();
+            Container.BindInterfacesTo<EnemiesFactory>().AsSingle();
         }
 
         private void BindStateMachine()

@@ -1,4 +1,5 @@
-﻿using Code.Game.Enemies;
+﻿using Code.Data.Level;
+using Code.Game.Enemies;
 using UnityEngine;
 using Zenject;
 
@@ -6,12 +7,20 @@ namespace Code.Infrastructure.Root.Level
 {
     public class LevelInstaller : MonoInstaller
     {
-        [SerializeField] private EnemiesSpawnPoints _spawnPoints;
+        [SerializeField] private EnemiesSpawnPoint spawnPoint;
+        [SerializeField] private LevelConfig _levelConfig;
 
         public override void InstallBindings()
         {
-            Container.Bind<EnemiesSpawnPoints>().FromInstance(_spawnPoints).AsSingle();
+            BindInstance();
+
             Container.Bind<IInitializable>().To<LevelInitialize>().AsSingle();
+        }
+
+        private void BindInstance()
+        {
+            Container.Bind<EnemiesSpawnPoint>().FromInstance(spawnPoint).AsSingle();
+            Container.Bind<LevelConfig>().FromInstance(_levelConfig).AsSingle();
         }
     }
 }

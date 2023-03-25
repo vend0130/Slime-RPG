@@ -3,21 +3,22 @@ using System.Threading;
 using Code.Infrastructure.Factories.Enemy;
 using Code.Infrastructure.Services.LoadScene;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace Code.Infrastructure.StateMachine.States
 {
     public class LoadLevelState : IPayloadState<string>, IDisposable
     {
         private readonly ILoaderScene _loadScene;
-        private readonly IEnemyFactory _enemyFactory;
+        private readonly IEnemiesFactory _enemiesFactory;
         private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
 
         private IGameStateMachine _gameStateMachine;
 
-        public LoadLevelState(ILoaderScene loadScene, IEnemyFactory enemyFactory)
+        public LoadLevelState(ILoaderScene loadScene, IEnemiesFactory enemiesFactory)
         {
             _loadScene = loadScene;
-            _enemyFactory = enemyFactory;
+            _enemiesFactory = enemiesFactory;
         }
 
         public void InitGameStateMachine(IGameStateMachine gameStateMachine) =>
@@ -45,14 +46,17 @@ namespace Code.Infrastructure.StateMachine.States
         private async UniTask CreateWorld()
         {
             //TODO
-            _enemyFactory.Warmup();
             CreateEnemies();
             await UniTask.Yield(cancellationToken: _cancellationToken.Token);
         }
 
         private void CreateEnemies()
         {
-            _enemyFactory.Create(null);
+            _enemiesFactory.Warmup();
+            _enemiesFactory.Create(null);
+            var target = new GameObject("target").transform; //TODO
+            target.position = new Vector3(-2.8f, 0, 0);
+            _enemiesFactory.InitSlime(target);
         }
     }
 }
