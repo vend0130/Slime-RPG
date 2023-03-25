@@ -1,4 +1,5 @@
-﻿using Code.Infrastructure.Factories.AssetsManagement;
+﻿using Code.Data;
+using Code.Infrastructure.Factories.AssetsManagement;
 using Code.Infrastructure.Factories.Enemy;
 using Code.Infrastructure.Factories.Game;
 using Code.Infrastructure.Factories.UI;
@@ -13,6 +14,7 @@ namespace Code.Infrastructure.Root.Boot
     public class BootInstaller : MonoInstaller, IInitializable
     {
         [SerializeField] private CurtainView _curtain;
+        [SerializeField] private HeroDefaultData _heroDefaultData;
         [SerializeField] private string _mainSceneName = "Main";
 
         public override void InstallBindings()
@@ -21,6 +23,8 @@ namespace Code.Infrastructure.Root.Boot
             BindLoaderScene();
             BindFactories();
 
+            Container.Bind<HeroDefaultData>().FromInstance(_heroDefaultData).AsSingle();
+            
             Container.BindInterfacesTo<BootInstaller>().FromInstance(this).AsSingle();
         }
 

@@ -53,6 +53,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5518777984627368109, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
+      propertyPath: _speed
+      value: 2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518777984627368109, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
       propertyPath: _animator
       value: 
       objectReference: {fileID: 2243040629551774925}
@@ -61,9 +65,21 @@ PrefabInstance:
       value: DefaultEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 7432879916796402843, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
+      propertyPath: _damage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7432879916796402843, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
       propertyPath: _animator
       value: 
       objectReference: {fileID: 2243040629551774925}
+    - target: {fileID: 7432879916796402843, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
+      propertyPath: _cooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7432879916796402843, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
+      propertyPath: _distanceToAttack
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 9166469945797961150, guid: 960238edc2d43e941aa169b6964ab108, type: 3}

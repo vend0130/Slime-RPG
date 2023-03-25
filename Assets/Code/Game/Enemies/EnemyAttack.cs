@@ -60,10 +60,7 @@ namespace Code.Game.Enemies
         private void OnAttack()
         {
             if (Hit(out Collider hit) && hit.TryGetComponent(out IHealth health))
-            {
                 health.TakeDamage(_damage);
-                DrawDebug(StartPoint(), Cleavage, .5f);
-            }
         }
 
         private bool Hit(out Collider hit)
@@ -83,17 +80,6 @@ namespace Code.Game.Enemies
             startPoint += _enemyComponent.Current.forward * _distanceToAttack;
 
             return startPoint;
-        }
-
-
-        private static void DrawDebug(Vector3 worldPos, float radius, float seconds)
-        {
-            Debug.DrawRay(worldPos, radius * Vector3.up, Color.red, seconds);
-            Debug.DrawRay(worldPos, radius * Vector3.down, Color.red, seconds);
-            Debug.DrawRay(worldPos, radius * Vector3.left, Color.red, seconds);
-            Debug.DrawRay(worldPos, radius * Vector3.right, Color.red, seconds);
-            Debug.DrawRay(worldPos, radius * Vector3.forward, Color.red, seconds);
-            Debug.DrawRay(worldPos, radius * Vector3.back, Color.red, seconds);
         }
     }
 }

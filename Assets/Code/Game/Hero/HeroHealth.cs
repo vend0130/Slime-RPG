@@ -6,7 +6,7 @@ namespace Code.Game.Hero
 {
     public class HeroHealth : MonoBehaviour, IHealth
     {
-        [SerializeField] private Transform _current;
+        [SerializeField] private HeroComponent _heroComponent;
         [SerializeField] private HPBar _hpBar;
         [SerializeField] private float _maxHp = 100;
         [SerializeField] private float _currentHp;
@@ -31,7 +31,7 @@ namespace Code.Game.Hero
 
             _currentHp = _currentHp - damage < 0 ? 0 : _currentHp - damage;
             _hpBar.SetValue(_currentHp, _maxHp);
-            _uiFactory.CreateTakeDamageUIText(_current.position + _offset, damage);
+            _uiFactory.CreateTakeDamageUIText(_heroComponent.Current.position + _offset, damage);
 
             if (_currentHp <= 0)
             {

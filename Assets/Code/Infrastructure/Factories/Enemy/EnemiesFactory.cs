@@ -14,6 +14,7 @@ namespace Code.Infrastructure.Factories.Enemy
         private readonly IAssetsProvider _assetsProvider;
 
         private List<List<EnemyComponent>> _wavesEnemies;
+        private List<EnemyComponent> _currentWaveEnemies;
         private int _currentWave;
         private Transform _target;
 
@@ -80,10 +81,32 @@ namespace Code.Infrastructure.Factories.Enemy
 
         public void StartWave()
         {
+            _currentWaveEnemies = _wavesEnemies[_currentWave];
             foreach (var enemy in _wavesEnemies[_currentWave])
             {
                 enemy.SetTarget(_target);
             }
+        }
+
+        public bool TryGetNearest(out Transform target)
+        {
+            if (_currentWaveEnemies == null || _currentWaveEnemies.Count == 0)
+            {
+                target = null;
+                return false;
+            }
+
+            target = _currentWaveEnemies[0].Current;
+            float distance = Vector3.Distance(_target.position, target.position);
+
+            for (int i = 1; i < _currentWaveEnemies.Count; i++)
+            {
+                float newDistance = Vector3.Distance(_target.position, _currentWaveEnemies[i].Current.position);
+                if (newDistance < distance)
+                    target = _currentWaveEnemies[i].Current;
+            }
+
+            return true;
         }
     }
 }

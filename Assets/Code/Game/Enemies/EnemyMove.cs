@@ -7,7 +7,7 @@ namespace Code.Game.Enemies
         [SerializeField] private EnemyComponent _enemyComponent;
         [SerializeField] private EnemyAnimator _animator;
         [SerializeField] private EnemyAttack _attack;
-        [SerializeField] private float _speed = 5f;
+        [SerializeField] private float _speed = 3f;
 
         private Transform _target;
 

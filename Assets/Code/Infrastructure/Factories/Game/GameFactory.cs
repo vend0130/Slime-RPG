@@ -1,5 +1,6 @@
 ﻿using Code.Game.Hero;
 using Code.Infrastructure.Factories.AssetsManagement;
+using Code.Infrastructure.Factories.Enemy;
 using Code.Infrastructure.Factories.UI;
 using UnityEngine;
 
@@ -8,12 +9,14 @@ namespace Code.Infrastructure.Factories.Game
     public class GameFactory : IGameFactory
     {
         private readonly IAssetsProvider _assetsProvider;
+        private readonly IEnemiesPoolable _enemiesPool;
         private readonly IUIFactory _uiFactory;
         private readonly Vector3 _spawnPoint = new Vector3(-3f, 0f, 0f);
 
-        public GameFactory(IAssetsProvider assetsProvider, IUIFactory uiFactory)
+        public GameFactory(IAssetsProvider assetsProvider, IEnemiesPoolable enemiesPool, IUIFactory uiFactory)
         {
             _assetsProvider = assetsProvider;
+            _enemiesPool = enemiesPool;
             _uiFactory = uiFactory;
         }
 
@@ -21,6 +24,7 @@ namespace Code.Infrastructure.Factories.Game
         {
             var hero = _assetsProvider.Instantiate(AssetPath.HeroPath, _spawnPoint);
             hero.GetComponentInChildren<HeroHealth>().InitFactory(_uiFactory);
+            hero.GetComponent<HeroComponent>().InitEnemiesPool(_enemiesPool);
             return hero;
         }
     }
