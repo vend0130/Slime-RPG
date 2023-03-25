@@ -11,5 +11,13 @@ namespace Code.Extensions
 
             tween.Kill();
         }
+
+        public static void SimpleKill(this Sequence sequence)
+        {
+            if (sequence == null || !sequence.active)
+                return;
+
+            sequence.Kill();
+        }
     }
 }

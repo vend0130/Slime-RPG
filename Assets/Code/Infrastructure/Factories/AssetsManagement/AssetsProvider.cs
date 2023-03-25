@@ -10,10 +10,10 @@ namespace Code.Infrastructure.Factories.AssetsManagement
             return Object.Instantiate(prefab, at, Quaternion.identity, null);
         }
 
-        public GameObject Instantiate(string path)
+        public GameObject Instantiate(string path, Transform parent)
         {
             GameObject prefab = Load(path);
-            return Object.Instantiate(prefab);
+            return Object.Instantiate(prefab, parent);
         }
 
         public GameObject Instantiate(GameObject prefab, Vector3 at, Transform parent) =>

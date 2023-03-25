@@ -9,6 +9,6 @@ namespace Code.Infrastructure.Factories.Enemy
         void InitLevel(EnemiesSpawnPoint spawnPoint, LevelConfig levelConfig);
         void Warmup();
         void Create(Transform target);
-        void InitSlime(Transform target);
+        void InitHero(Transform target);
     }
 }

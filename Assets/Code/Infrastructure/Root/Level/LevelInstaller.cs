@@ -9,6 +9,7 @@ namespace Code.Infrastructure.Root.Level
     {
         [SerializeField] private EnemiesSpawnPoint spawnPoint;
         [SerializeField] private LevelConfig _levelConfig;
+        [SerializeField] private Camera _camera;
 
         public override void InstallBindings()
         {
@@ -21,6 +22,7 @@ namespace Code.Infrastructure.Root.Level
         {
             Container.Bind<EnemiesSpawnPoint>().FromInstance(spawnPoint).AsSingle();
             Container.Bind<LevelConfig>().FromInstance(_levelConfig).AsSingle();
+            Container.Bind<Camera>().FromInstance(_camera).AsSingle();
         }
     }
 }

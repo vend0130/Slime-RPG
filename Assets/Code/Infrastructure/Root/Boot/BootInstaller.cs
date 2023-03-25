@@ -1,5 +1,7 @@
 ﻿using Code.Infrastructure.Factories.AssetsManagement;
 using Code.Infrastructure.Factories.Enemy;
+using Code.Infrastructure.Factories.Game;
+using Code.Infrastructure.Factories.UI;
 using Code.Infrastructure.Services.LoadScene;
 using Code.Infrastructure.StateMachine;
 using Code.Infrastructure.StateMachine.States;
@@ -17,7 +19,6 @@ namespace Code.Infrastructure.Root.Boot
         {
             BindStateMachine();
             BindLoaderScene();
-
             BindFactories();
 
             Container.BindInterfacesTo<BootInstaller>().FromInstance(this).AsSingle();
@@ -26,6 +27,8 @@ namespace Code.Infrastructure.Root.Boot
         private void BindFactories()
         {
             Container.Bind<IAssetsProvider>().To<AssetsProvider>().AsSingle();
+            Container.BindInterfacesTo<GameFactory>().AsSingle();
+            Container.BindInterfacesTo<UIFactory>().AsSingle();
             Container.BindInterfacesTo<EnemiesFactory>().AsSingle();
         }
 

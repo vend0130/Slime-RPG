@@ -34,7 +34,7 @@ namespace Code.Infrastructure.Factories.Enemy
             _nextSpawnPoint = _spawnPoint.DefaultSpawnPoint.position;
         }
 
-        public void InitSlime(Transform target) =>
+        public void InitHero(Transform target) =>
             _target = target;
 
         public void Warmup()
