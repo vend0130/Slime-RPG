@@ -14,6 +14,7 @@ namespace Code.Game.Enemies
         public bool IsAttack { get; private set; }
 
         private const float Cleavage = .25f;
+        private const string HeroLayerName = "Hero";
         private readonly Collider[] _hits = new Collider[1];
 
         private float _timeNextAttack;
@@ -22,7 +23,7 @@ namespace Code.Game.Enemies
 
         private void Awake()
         {
-            _layerMask = 1 << LayerMask.NameToLayer("Hero");
+            _layerMask = 1 << LayerMask.NameToLayer(HeroLayerName);
 
             _enemyComponent.SetTargetHandler += SetTarget;
             _animator.OnAttackHandler += OnAttack;

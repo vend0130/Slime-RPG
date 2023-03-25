@@ -80,6 +80,18 @@ PrefabInstance:
       propertyPath: _distanceToAttack
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8959255270367127145, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
+      propertyPath: m_Height
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959255270367127145, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
+      propertyPath: m_Radius
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959255270367127145, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
+      propertyPath: m_Center.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 9166469945797961150, guid: 960238edc2d43e941aa169b6964ab108, type: 3}

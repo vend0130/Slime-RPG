@@ -7,6 +7,7 @@ namespace Code.Game.Hero
     {
         [field: SerializeField] public Transform Current { get; private set; }
         [SerializeField] private HeroRotation _rotation;
+        [SerializeField] private HeroAttack _attack;
 
         private IEnemiesPoolable _enemiesPoolable;
 
@@ -15,6 +16,7 @@ namespace Code.Game.Hero
             if (_enemiesPoolable.TryGetNearest(out Transform target))
             {
                 _rotation.Look(at: target.position);
+                _attack.Attack(target);
             }
         }
 

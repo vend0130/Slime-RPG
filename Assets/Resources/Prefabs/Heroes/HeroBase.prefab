@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6886847185092344629}
   - component: {fileID: 3170281714777668591}
   - component: {fileID: 8828515813681271203}
+  - component: {fileID: 4102737090546201264}
   m_Layer: 7
   m_Name: HeroBase
   m_TagString: Untagged
@@ -34,6 +35,7 @@ Transform:
   m_Children:
   - {fileID: 5269005457922659366}
   - {fileID: 587253612354330643}
+  - {fileID: 4387267263020011936}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -65,6 +67,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Current>k__BackingField: {fileID: 502281611278541754}
   _rotation: {fileID: 8828515813681271203}
+  _attack: {fileID: 4102737090546201264}
 --- !u!114 &3170281714777668591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +97,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _heroComponent: {fileID: 6886847185092344629}
+--- !u!114 &4102737090546201264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3527995367152801391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bf171dfadd84a21b356f8aa51ad792c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _heroComponent: {fileID: 6886847185092344629}
+  _sphereSpawnPoint: {fileID: 4387267263020011936}
+  _distanceToAttack: 7
+  _cooldown: 0.5
+  _damage: 20
+--- !u!1 &4777654454179996004
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4387267263020011936}
+  m_Layer: 7
+  m_Name: SphereSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4387267263020011936
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4777654454179996004}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 502281611278541754}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5095137680041302190
 GameObject:
   m_ObjectHideFlags: 0

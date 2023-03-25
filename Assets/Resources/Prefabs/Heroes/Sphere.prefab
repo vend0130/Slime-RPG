@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4385965150506881848}
   - component: {fileID: 4043185141182664347}
   - component: {fileID: 1830280849277754363}
+  - component: {fileID: 944821523246076511}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4043185141182664347
 MeshFilter:
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &944821523246076511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6232116174159168389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45cb5b9eb3924232b8a803310a554834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _current: {fileID: 4385965150506881848}

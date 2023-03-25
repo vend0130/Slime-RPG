@@ -124,6 +124,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
+    - target: {fileID: 4387267263020011936, guid: d48d133268688b24493d9ba579466134, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6651354919322189399, guid: d48d133268688b24493d9ba579466134, type: 3}
       propertyPath: m_Height
       value: 3
