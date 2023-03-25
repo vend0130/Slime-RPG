@@ -7,7 +7,7 @@ namespace Code.Game.Enemies
     {
         [SerializeField] private EnemyComponent _enemyComponent;
         [SerializeField] private EnemyAnimator _animator;
-        [SerializeField] private float _damage = 2f;
+        [SerializeField] private float _damage = 25f;
         [SerializeField] private float _cooldown = 1f;
         [SerializeField] private float _distanceToAttack = 1.3f;
 
@@ -59,8 +59,9 @@ namespace Code.Game.Enemies
 
         private void OnAttack()
         {
-            if (Hit(out Collider hit))
+            if (Hit(out Collider hit) && hit.TryGetComponent(out IHealth health))
             {
+                health.TakeDamage(_damage);
                 DrawDebug(StartPoint(), Cleavage, .5f);
             }
         }
