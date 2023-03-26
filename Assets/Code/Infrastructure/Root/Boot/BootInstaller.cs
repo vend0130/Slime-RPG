@@ -23,9 +23,15 @@ namespace Code.Infrastructure.Root.Boot
             BindLoaderScene();
             BindFactories();
 
-            Container.Bind<HeroDefaultData>().FromInstance(_heroDefaultData).AsSingle();
+            BindData();
 
             Container.BindInterfacesTo<BootInstaller>().FromInstance(this).AsSingle();
+        }
+
+        private void BindData()
+        {
+            Container.Bind<HeroDefaultData>().FromInstance(_heroDefaultData).AsSingle();
+            Container.Bind<PlayerProgressData>().AsSingle();
         }
 
         private void BindFactories()

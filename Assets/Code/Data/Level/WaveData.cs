@@ -9,5 +9,6 @@ namespace Code.Data.Level
         [field: SerializeField] public int EnemiesCount { get; private set; } = 1;
         [field: SerializeField] public int EnemiesHp { get; private set; } = 45;
         [field: SerializeField] public int EnemiesDamage { get; private set; } = 30;
+        [field: SerializeField] public int DropCoinsCount { get; private set; } = 50;
     }
 }

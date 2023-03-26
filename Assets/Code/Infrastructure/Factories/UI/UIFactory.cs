@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using Code.Data;
 using Code.Extensions;
 using Code.Infrastructure.Factories.AssetsManagement;
 using Code.UI;
@@ -16,6 +17,7 @@ namespace Code.Infrastructure.Factories.UI
         private const float DropCoinsRadius = 35;
 
         private readonly IAssetsProvider _assetsProvider;
+        private readonly PlayerProgressData _progressData;
         private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
 
         private List<TakeDamageText> _takeDamageTexts;
@@ -24,8 +26,11 @@ namespace Code.Infrastructure.Factories.UI
         private CoinsUI _coinsUI;
         private List<RectTransform> _coins;
 
-        public UIFactory(IAssetsProvider assetsProvider) =>
+        public UIFactory(IAssetsProvider assetsProvider, PlayerProgressData progressData)
+        {
             _assetsProvider = assetsProvider;
+            _progressData = progressData;
+        }
 
         public void Dispose()
         {
@@ -70,7 +75,7 @@ namespace Code.Infrastructure.Factories.UI
                 .Instantiate(AssetPath.CoinsUIPath, Vector3.zero)
                 .GetComponent<CoinsUI>();
 
-            _coinsUI.InitFactory(this);
+            _coinsUI.Init(this, _progressData.CoinsData);
 
             for (int i = 0; i < MaxDropCoins + MinDropCoins; i++)
             {
@@ -78,7 +83,7 @@ namespace Code.Infrastructure.Factories.UI
             }
         }
 
-        public void DropCoins(Vector3 worldPosition)
+        public void DropCoins(Vector3 worldPosition, int dropCoins)
         {
             int count = Random.Range(MinDropCoins, MaxDropCoins + 1);
             List<RectTransform> coins = new List<RectTransform>(count);
@@ -86,29 +91,32 @@ namespace Code.Infrastructure.Factories.UI
             RectTransform coin;
 
             for (int i = 0; i < count; i++)
-            {
-                if (TryGetCoins(out coin))
-                {
-                    coins.Add(coin);
-                }
-                else
-                {
-                    coin = CreateCoin();
-                    coins.Add(coin);
-                }
+                DropCoin(coins, worldPosition);
 
-
-                Vector2 position = Random.insideUnitCircle * DropCoinsRadius +
-                                   ConvertWorldToCanvasPosition(worldPosition, _coinsUI.SizeDelta);
-                coin.anchoredPosition = position;
-                coin.gameObject.SetActive(true);
-            }
-
-            _coinsUI.CoinsMoveToBar(coins);
+            _coinsUI.CoinsMoveToBar(coins, dropCoins);
         }
 
         public void CoinsBackToPool(List<RectTransform> coins) =>
             _coins.AddRange(coins);
+
+        private void DropCoin(List<RectTransform> coins, Vector3 worldPosition)
+        {
+            if (TryGetCoins(out var coin))
+            {
+                coins.Add(coin);
+            }
+            else
+            {
+                coin = CreateCoin();
+                coins.Add(coin);
+            }
+
+            Vector2 position = Random.insideUnitCircle * DropCoinsRadius +
+                               ConvertWorldToCanvasPosition(worldPosition, _coinsUI.SizeDelta);
+
+            coin.anchoredPosition = position;
+            coin.gameObject.SetActive(true);
+        }
 
         private bool TryGetCoins(out RectTransform coin)
         {

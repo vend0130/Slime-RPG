@@ -12,7 +12,7 @@ namespace Code.Infrastructure.Factories.UI
         EndGame CreateEndGame();
         void Warmup();
         void CreateCoinsUI();
-        void DropCoins(Vector3 worldPosition);
+        void DropCoins(Vector3 worldPosition, int dropCoins);
         void CoinsBackToPool(List<RectTransform> coins);
     }
 }

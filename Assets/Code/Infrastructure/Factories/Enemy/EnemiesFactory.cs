@@ -78,7 +78,7 @@ namespace Code.Infrastructure.Factories.Enemy
 
             enemy
                 .GetComponent<EnemyHealth>()
-                .Init(_uiFactory, _levelConfig.Waves[wave].EnemiesHp);
+                .Init(_uiFactory, _levelConfig.Waves[wave].EnemiesHp, _levelConfig.Waves[wave].DropCoinsCount);
 
             enemy
                 .GetComponent<EnemyAttack>()
