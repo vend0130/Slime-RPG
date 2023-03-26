@@ -8,5 +8,7 @@
         public const string TakeDamageUIPath = "Prefabs/UI/UnitsTakeDamege/UnitsTakeDamegeUI";
         public const string TakeDamageUITextPath = "Prefabs/UI/UnitsTakeDamege/Text";
         public const string EndGameUIPath = "Prefabs/UI/EndGame_Canvas";
+        public const string CoinsUIPath = "Prefabs/UI/Coins/Coins_Canvas";
+        public const string CoinUIPath = "Prefabs/UI/Coins/Coin";
     }
 }

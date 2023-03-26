@@ -15,9 +15,9 @@ namespace Code.Game
         private const int JumpCount = 1;
         private const string EnemyLayerName = "Enemy";
         private const float Cleavage = .4f;
-        
+
         private readonly Collider[] _hits = new Collider[1];
-        
+
         private IGameFactory _gameFactory;
         private Tween _tween;
         private int _layerMask;
@@ -56,7 +56,7 @@ namespace Code.Game
             gameObject.SetActive(false);
             _gameFactory.SphereBackToPool(this);
         }
-        
+
         private bool Hit(out Collider hit)
         {
             int hitCount = Physics.OverlapSphereNonAlloc(_current.position, Cleavage, _hits, _layerMask);

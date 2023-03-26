@@ -18,7 +18,7 @@ namespace Code.Game.Hero
         public void InitFactory(IGameFactory gameFactory) =>
             _gameFactory = gameFactory;
 
-        public bool IsAttack(Transform target) => 
+        public bool IsAttack(Transform target) =>
             Vector3.Distance(_heroComponent.Current.position, target.position) < _distanceToAttack;
 
         public void Attack(Transform target)

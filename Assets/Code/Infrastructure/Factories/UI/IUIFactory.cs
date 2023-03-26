@@ -1,4 +1,5 @@
-﻿using Code.UI;
+﻿using System.Collections.Generic;
+using Code.UI;
 using UnityEngine;
 
 namespace Code.Infrastructure.Factories.UI
@@ -10,5 +11,8 @@ namespace Code.Infrastructure.Factories.UI
         void BackToPool(TakeDamageText text);
         EndGame CreateEndGame();
         void Warmup();
+        void CreateCoinsUI();
+        void DropCoins(Vector3 worldPosition);
+        void CoinsBackToPool(List<RectTransform> coins);
     }
 }

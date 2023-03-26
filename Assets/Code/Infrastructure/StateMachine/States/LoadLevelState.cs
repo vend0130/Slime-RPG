@@ -57,6 +57,7 @@ namespace Code.Infrastructure.StateMachine.States
             _hero = _gameFactory.CreateHero();
             CreateEnemies(_hero.Current);
             _uiFactory.Warmup();
+            _uiFactory.CreateCoinsUI();
             await UniTask.Yield(cancellationToken: _cancellationToken.Token);
         }
 

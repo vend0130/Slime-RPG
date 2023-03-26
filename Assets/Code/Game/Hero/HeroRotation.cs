@@ -11,7 +11,7 @@ namespace Code.Game.Hero
         public void Look(Vector3 at) =>
             _transform.LookAt(at);
 
-        public void Reset() => 
+        public void Reset() =>
             _transform.eulerAngles = _defaultRotation;
     }
 }

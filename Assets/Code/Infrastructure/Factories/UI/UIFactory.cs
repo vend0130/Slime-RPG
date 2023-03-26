@@ -5,17 +5,24 @@ using Code.Extensions;
 using Code.Infrastructure.Factories.AssetsManagement;
 using Code.UI;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Code.Infrastructure.Factories.UI
 {
     public class UIFactory : IUIFactory, IDisposable
     {
+        private const int MinDropCoins = 2;
+        private const int MaxDropCoins = 2;
+        private const float DropCoinsRadius = 35;
+
         private readonly IAssetsProvider _assetsProvider;
         private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
 
         private List<TakeDamageText> _takeDamageTexts;
         private RectTransform _takeDamageUI;
         private Camera _camera;
+        private CoinsUI _coinsUI;
+        private List<RectTransform> _coins;
 
         public UIFactory(IAssetsProvider assetsProvider) =>
             _assetsProvider = assetsProvider;
@@ -44,8 +51,11 @@ namespace Code.Infrastructure.Factories.UI
                 ? CreateText()
                 : _takeDamageTexts.GetAndDeleteElement();
 
-            textObject.StartEffect(CalculatePositionOnCanvas(worldPosition), $"{damage}");
+            textObject.StartEffect(ConvertWorldToCanvasPosition(worldPosition, _takeDamageUI.sizeDelta), $"{damage}");
         }
+
+        public void BackToPool(TakeDamageText text) =>
+            _takeDamageTexts.Add(text);
 
         public EndGame CreateEndGame()
         {
@@ -53,8 +63,71 @@ namespace Code.Infrastructure.Factories.UI
             return endGame.GetComponent<EndGame>();
         }
 
-        public void BackToPool(TakeDamageText text) =>
-            _takeDamageTexts.Add(text);
+        public void CreateCoinsUI()
+        {
+            _coins = new List<RectTransform>();
+            _coinsUI = _assetsProvider
+                .Instantiate(AssetPath.CoinsUIPath, Vector3.zero)
+                .GetComponent<CoinsUI>();
+
+            _coinsUI.InitFactory(this);
+
+            for (int i = 0; i < MaxDropCoins + MinDropCoins; i++)
+            {
+                _coins.Add(CreateCoin());
+            }
+        }
+
+        public void DropCoins(Vector3 worldPosition)
+        {
+            int count = Random.Range(MinDropCoins, MaxDropCoins + 1);
+            List<RectTransform> coins = new List<RectTransform>(count);
+
+            RectTransform coin;
+
+            for (int i = 0; i < count; i++)
+            {
+                if (TryGetCoins(out coin))
+                {
+                    coins.Add(coin);
+                }
+                else
+                {
+                    coin = CreateCoin();
+                    coins.Add(coin);
+                }
+
+
+                Vector2 position = Random.insideUnitCircle * DropCoinsRadius +
+                                   ConvertWorldToCanvasPosition(worldPosition, _coinsUI.SizeDelta);
+                coin.anchoredPosition = position;
+                coin.gameObject.SetActive(true);
+            }
+
+            _coinsUI.CoinsMoveToBar(coins);
+        }
+
+        public void CoinsBackToPool(List<RectTransform> coins) =>
+            _coins.AddRange(coins);
+
+        private bool TryGetCoins(out RectTransform coin)
+        {
+            if (_coins.Count == 0)
+            {
+                coin = null;
+                return false;
+            }
+
+            coin = _coins.GetAndDeleteElement();
+            return true;
+        }
+
+        private RectTransform CreateCoin()
+        {
+            var coin = _assetsProvider.Instantiate(AssetPath.CoinUIPath, _coinsUI.Parent);
+            coin.SetActive(false);
+            return coin.GetComponent<RectTransform>();
+        }
 
         private TakeDamageText CreateText()
         {
@@ -68,9 +141,8 @@ namespace Code.Infrastructure.Factories.UI
             return textObject;
         }
 
-        private Vector2 CalculatePositionOnCanvas(Vector3 worldPosition)
+        private Vector2 ConvertWorldToCanvasPosition(Vector3 worldPosition, Vector2 sizeDelta)
         {
-            Vector2 sizeDelta = _takeDamageUI.sizeDelta;
             Vector2 viewportPosition = _camera.WorldToViewportPoint(worldPosition);
 
             return new Vector2(((viewportPosition.x * sizeDelta.x) - (sizeDelta.x * .5f)),
