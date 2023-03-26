@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using Code.Data;
+using Code.Data.PlayerProgress;
 using Code.Extensions;
 using Code.Infrastructure.Factories.AssetsManagement;
 using Code.UI;
@@ -12,8 +13,8 @@ namespace Code.Infrastructure.Factories.UI
 {
     public class UIFactory : IUIFactory, IDisposable
     {
-        private const int MinDropCoins = 2;
-        private const int MaxDropCoins = 2;
+        private const int MinDropCoins = 3;
+        private const int MaxDropCoins = 5;
         private const float DropCoinsRadius = 35;
 
         private readonly IAssetsProvider _assetsProvider;
@@ -96,6 +97,12 @@ namespace Code.Infrastructure.Factories.UI
 
         public void CoinsBackToPool(List<RectTransform> coins) =>
             _coins.AddRange(coins);
+
+        public StatsUI CreateStatsUI() =>
+            _assetsProvider.Instantiate(AssetPath.StatsUIPath, Vector3.zero).GetComponent<StatsUI>();
+
+        public GameObject CreateStatUI(Transform parent) =>
+            _assetsProvider.Instantiate(AssetPath.StatUIPath, parent);
 
         private void DropCoin(List<RectTransform> coins, Vector3 worldPosition)
         {

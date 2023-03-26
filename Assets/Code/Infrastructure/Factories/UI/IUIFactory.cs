@@ -14,5 +14,7 @@ namespace Code.Infrastructure.Factories.UI
         void CreateCoinsUI();
         void DropCoins(Vector3 worldPosition, int dropCoins);
         void CoinsBackToPool(List<RectTransform> coins);
+        StatsUI CreateStatsUI();
+        GameObject CreateStatUI(Transform parent);
     }
 }

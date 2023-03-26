@@ -76,6 +76,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _curtain: {fileID: 1277283894799639679}
+  _heroDefaultData: {fileID: 0}
+  _statsData: {fileID: 11400000, guid: dc7aea72e7d6ae848b52be9bf38a3e63, type: 2}
   _mainSceneName: Main
 --- !u!1001 &6032047803640292341
 PrefabInstance:

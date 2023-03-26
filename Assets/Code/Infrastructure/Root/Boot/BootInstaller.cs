@@ -1,9 +1,11 @@
 ﻿using Code.Data;
+using Code.Data.PlayerProgress;
 using Code.Infrastructure.Factories.AssetsManagement;
 using Code.Infrastructure.Factories.Enemy;
 using Code.Infrastructure.Factories.Game;
 using Code.Infrastructure.Factories.UI;
 using Code.Infrastructure.Services.LoadScene;
+using Code.Infrastructure.Services.Stats;
 using Code.Infrastructure.StateMachine;
 using Code.Infrastructure.StateMachine.States;
 using UnityEngine;
@@ -15,6 +17,7 @@ namespace Code.Infrastructure.Root.Boot
     {
         [SerializeField] private CurtainView _curtain;
         [SerializeField] private HeroDefaultData _heroDefaultData;
+        [SerializeField] private StatsData _statsData;
         [SerializeField] private string _mainSceneName = "Main";
 
         public override void InstallBindings()
@@ -22,8 +25,9 @@ namespace Code.Infrastructure.Root.Boot
             BindStateMachine();
             BindLoaderScene();
             BindFactories();
-
             BindData();
+
+            Container.BindInterfacesTo<StatsService>().AsSingle();
 
             Container.BindInterfacesTo<BootInstaller>().FromInstance(this).AsSingle();
         }
@@ -32,6 +36,7 @@ namespace Code.Infrastructure.Root.Boot
         {
             Container.Bind<HeroDefaultData>().FromInstance(_heroDefaultData).AsSingle();
             Container.Bind<PlayerProgressData>().AsSingle();
+            Container.Bind<StatsData>().FromInstance(_statsData).AsSingle();
         }
 
         private void BindFactories()

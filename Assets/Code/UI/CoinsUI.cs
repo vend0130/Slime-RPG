@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Code.Data;
+using Code.Data.PlayerProgress;
 using Code.Extensions;
 using Code.Infrastructure.Factories.UI;
 using DG.Tweening;

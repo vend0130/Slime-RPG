@@ -5,10 +5,16 @@
         public const string DefaultEnemyPath = "Prefabs/Enemies/DefaultEnemy";
         public const string HeroPath = "Prefabs/Heroes/Slime";
         public const string SpherePath = "Prefabs/Heroes/Sphere";
+
         public const string TakeDamageUIPath = "Prefabs/UI/UnitsTakeDamege/UnitsTakeDamegeUI";
         public const string TakeDamageUITextPath = "Prefabs/UI/UnitsTakeDamege/Text";
+
         public const string EndGameUIPath = "Prefabs/UI/EndGame_Canvas";
+
         public const string CoinsUIPath = "Prefabs/UI/Coins/Coins_Canvas";
         public const string CoinUIPath = "Prefabs/UI/Coins/Coin";
+
+        public const string StatsUIPath = "Prefabs/UI/Stats/Stats_Canvas";
+        public const string StatUIPath = "Prefabs/UI/Stats/Stat";
     }
 }
