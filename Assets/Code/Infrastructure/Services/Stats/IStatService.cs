@@ -8,5 +8,6 @@ namespace Code.Infrastructure.Services.Stats
         UniTask CreateStatsUI();
         void Reset();
         event Action HpChangedHandler;
+        event Action ASPDChangedHandler;
     }
 }

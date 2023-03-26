@@ -7,5 +7,6 @@ namespace Code.Data
     {
         [field: SerializeField] public StatData Attack { get; private set; }
         [field: SerializeField] public StatData HP { get; private set; }
+        [field: SerializeField] public StatData ASPD { get; private set; }
     }
 }

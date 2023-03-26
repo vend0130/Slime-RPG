@@ -1,5 +1,7 @@
-﻿using Code.Data.PlayerProgress;
+﻿using System;
+using Code.Data.PlayerProgress;
 using Code.Infrastructure.Factories.Game;
+using Code.Infrastructure.Services.Stats;
 using UnityEngine;
 
 namespace Code.Game.Hero
@@ -10,16 +12,25 @@ namespace Code.Game.Hero
         [SerializeField] private HeroComponent _heroComponent;
         [SerializeField] private Transform _sphereSpawnPoint;
         [SerializeField] private float _distanceToAttack = 7f;
-        [SerializeField] private float _cooldown = .5f; //TODO
+        [SerializeField] private float _cooldown = 1f; //TODO
 
         private IGameFactory _gameFactory;
         private float _timeNextAttack;
-        private StatProgressData _attackData;
+        private StatsProgressData _statsProgress;
+        private IStatService _statService;
 
-        public void Init(IGameFactory gameFactory, PlayerProgressData playerProgressData)
+        private void OnDestroy()
+        {
+            _statService.ASPDChangedHandler -= CooldownChange;
+        }
+
+        public void Init(IGameFactory gameFactory, PlayerProgressData playerProgressData, IStatService statService)
         {
             _gameFactory = gameFactory;
-            _attackData = playerProgressData.StatsProgressData.AttackData;
+            _statsProgress = playerProgressData.StatsProgressData;
+            _statService = statService;
+
+            _statService.ASPDChangedHandler += CooldownChange;
         }
 
         public bool IsAttack(Transform target) =>
@@ -39,7 +50,13 @@ namespace Code.Game.Hero
 
             targetPoint.y = sphereSpawnPoint.y;
 
-            _gameFactory.CreateSphere(_attackData.Number, sphereSpawnPoint, targetPoint);
+            _gameFactory.CreateSphere(_statsProgress.AttackData.Number, sphereSpawnPoint, targetPoint);
+        }
+
+        private void CooldownChange()
+        {
+            _cooldown = 1 - (_statsProgress.ASPDData.Number - 1);
+            _cooldown = _cooldown < .1f ? .1f : _cooldown;
         }
     }
 }

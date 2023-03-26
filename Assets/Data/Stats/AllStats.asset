@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Attack>k__BackingField: {fileID: 11400000, guid: 32f80e3c0c2c3fe479a0d19ab693a8fc, type: 2}
   <HP>k__BackingField: {fileID: 11400000, guid: 9618ef9bef1a7a546b8392c9dac35d77, type: 2}
+  <ASPD>k__BackingField: {fileID: 11400000, guid: edc43579f5a037145aaa6f68c163dfd7, type: 2}

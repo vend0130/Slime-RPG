@@ -44,7 +44,7 @@ namespace Code.Infrastructure.Factories.Game
             var hero = _assetsProvider.Instantiate(AssetPath.HeroPath, _spawnPoint);
 
             hero.GetComponentInChildren<HeroHealth>().Init(_uiFactory, _playerProgressData, _statService);
-            hero.GetComponent<HeroAttack>().Init(this, _playerProgressData);
+            hero.GetComponent<HeroAttack>().Init(this, _playerProgressData, _statService);
 
             var heroComponent = hero.GetComponent<HeroComponent>();
             heroComponent.InitEnemiesPool(_enemiesPool);
@@ -74,7 +74,7 @@ namespace Code.Infrastructure.Factories.Game
             {
                 sphere = _spheres.GetAndDeleteElement();
             }
-            
+
             _sphereMoves.Add(sphere);
 
             sphere.StartMove(damage, startPoint, targetPoint);
@@ -82,10 +82,10 @@ namespace Code.Infrastructure.Factories.Game
 
         public void UnSpawnSpheres()
         {
-            if(_spheres == null || _spheres.Count == 0)
+            if (_spheres == null || _spheres.Count == 0)
                 return;
-            
-            foreach (SphereMove sphere in _sphereMoves) 
+
+            foreach (SphereMove sphere in _sphereMoves)
                 sphere.StopMove();
         }
 
