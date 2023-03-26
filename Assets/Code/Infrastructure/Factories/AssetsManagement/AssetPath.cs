@@ -7,5 +7,6 @@
         public const string SpherePath = "Prefabs/Heroes/Sphere";
         public const string TakeDamageUIPath = "Prefabs/UI/UnitsTakeDamege/UnitsTakeDamegeUI";
         public const string TakeDamageUITextPath = "Prefabs/UI/UnitsTakeDamege/Text";
+        public const string EndGameUIPath = "Prefabs/UI/EndGame_Canvas";
     }
 }

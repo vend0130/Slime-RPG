@@ -47,6 +47,7 @@ namespace Code.Infrastructure.Factories.Enemy
             _prefab = _assetsProvider.Load(AssetPath.DefaultEnemyPath);
             _parent = new GameObject(EnemiesParentName).transform;
             _wavesEnemies = new List<List<EnemyComponent>>();
+            CurrentWaveEnemies = new List<EnemyComponent>();
         }
 
         public void Create()

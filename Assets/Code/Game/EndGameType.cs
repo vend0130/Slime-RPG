@@ -2,7 +2,7 @@
 {
     public enum EndGameType
     {
-        Win,
-        Loss
+        Win = 0,
+        Loss = 1
     }
 }

@@ -8,5 +8,7 @@ namespace Code.Infrastructure.Factories.UI
         void CreateTakeDamageUIText(Vector3 worldPosition, float damage);
         void InitCamera(Camera camera);
         void BackToPool(TakeDamageText text);
+        EndGame CreateEndGame();
+        void Warmup();
     }
 }

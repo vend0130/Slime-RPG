@@ -3,6 +3,7 @@ using System.Threading;
 using Code.Game.Hero;
 using Code.Infrastructure.Factories.Enemy;
 using Code.Infrastructure.Factories.Game;
+using Code.Infrastructure.Factories.UI;
 using Code.Infrastructure.Services.LoadScene;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -14,16 +15,19 @@ namespace Code.Infrastructure.StateMachine.States
         private readonly ILoaderScene _loadScene;
         private readonly IGameFactory _gameFactory;
         private readonly IEnemiesFactory _enemiesFactory;
+        private readonly IUIFactory _uiFactory;
         private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
 
         private IGameStateMachine _gameStateMachine;
         private HeroComponent _hero;
 
-        public LoadLevelState(ILoaderScene loadScene, IGameFactory gameFactory, IEnemiesFactory enemiesFactory)
+        public LoadLevelState(ILoaderScene loadScene, IGameFactory gameFactory,
+            IEnemiesFactory enemiesFactory, IUIFactory uiFactory)
         {
             _loadScene = loadScene;
             _gameFactory = gameFactory;
             _enemiesFactory = enemiesFactory;
+            _uiFactory = uiFactory;
         }
 
         public void InitGameStateMachine(IGameStateMachine gameStateMachine) =>
@@ -52,6 +56,7 @@ namespace Code.Infrastructure.StateMachine.States
         {
             _hero = _gameFactory.CreateHero();
             CreateEnemies(_hero.Current);
+            _uiFactory.Warmup();
             await UniTask.Yield(cancellationToken: _cancellationToken.Token);
         }
 

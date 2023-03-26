@@ -69,8 +69,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 10
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 76e18d54c3a46c245857ea51748a66b0, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 76e18d54c3a46c245857ea51748a66b0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -150,3 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rectTransform: {fileID: 7414260844532011415}
   _textMeshProUGUI: {fileID: 4054976464689263274}
+  _defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  _duration: 0.5
+  _targetPointMove: 70
+  _ease: 9
