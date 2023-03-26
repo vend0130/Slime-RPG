@@ -10,5 +10,11 @@
             AttackData = new StatProgressData(allStats.Attack);
             HPData = new StatProgressData(allStats.HP);
         }
+
+        public void Reset(AllStats allStats)
+        {
+            AttackData.Reset(allStats.Attack);
+            HPData.Reset(allStats.HP);
+        }
     }
 }

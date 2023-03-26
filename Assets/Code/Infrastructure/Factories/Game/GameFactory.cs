@@ -23,6 +23,7 @@ namespace Code.Infrastructure.Factories.Game
         private readonly Vector3 _spawnPoint = new Vector3(-3.25f, 0f, 0f);
 
         private List<SphereMove> _spheres;
+        private List<SphereMove> _sphereMoves;
         private Transform _parentForSpheres;
 
         public GameFactory(IAssetsProvider assetsProvider, IEnemiesPoolable enemiesPool,
@@ -38,6 +39,7 @@ namespace Code.Infrastructure.Factories.Game
         public HeroComponent CreateHero()
         {
             _spheres = new List<SphereMove>();
+            _sphereMoves = new List<SphereMove>();
 
             var hero = _assetsProvider.Instantiate(AssetPath.HeroPath, _spawnPoint);
 
@@ -72,11 +74,25 @@ namespace Code.Infrastructure.Factories.Game
             {
                 sphere = _spheres.GetAndDeleteElement();
             }
+            
+            _sphereMoves.Add(sphere);
 
             sphere.StartMove(damage, startPoint, targetPoint);
         }
 
-        public void SphereBackToPool(SphereMove sphere) =>
+        public void UnSpawnSpheres()
+        {
+            if(_spheres == null || _spheres.Count == 0)
+                return;
+            
+            foreach (SphereMove sphere in _sphereMoves) 
+                sphere.StopMove();
+        }
+
+        public void SphereBackToPool(SphereMove sphere)
+        {
             _spheres.Add(sphere);
+            _sphereMoves.Remove(sphere);
+        }
     }
 }

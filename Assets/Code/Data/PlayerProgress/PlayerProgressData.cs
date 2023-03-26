@@ -11,7 +11,10 @@
             StatsProgressData = new StatsProgressData(allStats);
         }
 
-        public void Reset() =>
+        public void Reset(AllStats allStats)
+        {
             CoinsData.Reset();
+            StatsProgressData.Reset(allStats);
+        }
     }
 }

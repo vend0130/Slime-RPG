@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using Code.Data;
 using Code.Data.PlayerProgress;
 using Code.Extensions;
 using Code.Infrastructure.Factories.AssetsManagement;
@@ -26,6 +25,8 @@ namespace Code.Infrastructure.Factories.UI
         private Camera _camera;
         private CoinsUI _coinsUI;
         private List<RectTransform> _coins;
+
+
 
         public UIFactory(IAssetsProvider assetsProvider, PlayerProgressData progressData)
         {
@@ -98,11 +99,16 @@ namespace Code.Infrastructure.Factories.UI
         public void CoinsBackToPool(List<RectTransform> coins) =>
             _coins.AddRange(coins);
 
-        public StatsUI CreateStatsUI() =>
+        public StatsUI CreateStatsUI() => 
             _assetsProvider.Instantiate(AssetPath.StatsUIPath, Vector3.zero).GetComponent<StatsUI>();
 
         public GameObject CreateStatUI(Transform parent) =>
             _assetsProvider.Instantiate(AssetPath.StatUIPath, parent);
+
+        public void UnSpawn()
+        {
+            _coinsUI.Destroy();
+        }
 
         private void DropCoin(List<RectTransform> coins, Vector3 worldPosition)
         {

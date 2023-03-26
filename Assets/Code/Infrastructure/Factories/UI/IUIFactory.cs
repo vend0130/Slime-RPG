@@ -16,5 +16,6 @@ namespace Code.Infrastructure.Factories.UI
         void CoinsBackToPool(List<RectTransform> coins);
         StatsUI CreateStatsUI();
         GameObject CreateStatUI(Transform parent);
+        void UnSpawn();
     }
 }

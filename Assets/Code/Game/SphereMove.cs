@@ -51,6 +51,12 @@ namespace Code.Game
             _tween.OnComplete(EndMove);
         }
 
+        public void StopMove()
+        {
+            _tween.SimpleKill();
+            gameObject.SetActive(false);
+        }
+
         private void EndMove()
         {
             gameObject.SetActive(false);

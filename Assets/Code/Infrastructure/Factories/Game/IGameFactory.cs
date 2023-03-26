@@ -9,5 +9,6 @@ namespace Code.Infrastructure.Factories.Game
         HeroComponent CreateHero();
         void CreateSphere(float damage, Vector3 startPoint, Vector3 targetPoint);
         void SphereBackToPool(SphereMove sphere);
+        void UnSpawnSpheres();
     }
 }

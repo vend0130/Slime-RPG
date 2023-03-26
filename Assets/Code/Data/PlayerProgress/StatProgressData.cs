@@ -9,6 +9,11 @@
 
         public StatProgressData(StatData statData)
         {
+            Reset(statData);
+        }
+
+        public void Reset(StatData statData)
+        {
             Name = statData.Name;
             Level = 1;
             Number = statData.DefaultNumber;

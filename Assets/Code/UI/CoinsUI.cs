@@ -41,6 +41,11 @@ namespace Code.UI
             _coinsData.ChangedHandler += ChangeCoins;
         }
 
+        public void Destroy()
+        {
+            Destroy(gameObject);
+        }
+
         public void CoinsMoveToBar(List<RectTransform> coins, int coinsCount)
         {
             _sequence.SimpleKill();

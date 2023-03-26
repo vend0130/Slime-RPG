@@ -21,6 +21,7 @@ namespace Code.Infrastructure.StateMachine.States
         private readonly IUIFactory _uiFactory;
         private readonly PlayerProgressData _progressData;
         private readonly IStatService _statService;
+        private readonly AllStats _allStats;
         private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
 
         private IGameStateMachine _gameStateMachine;
@@ -28,7 +29,7 @@ namespace Code.Infrastructure.StateMachine.States
 
         public LoadLevelState(ILoaderScene loadScene, IGameFactory gameFactory,
             IEnemiesFactory enemiesFactory, IUIFactory uiFactory,
-            PlayerProgressData progressData, IStatService statService)
+            PlayerProgressData progressData, IStatService statService, AllStats allStats)
         {
             _loadScene = loadScene;
             _gameFactory = gameFactory;
@@ -36,6 +37,7 @@ namespace Code.Infrastructure.StateMachine.States
             _uiFactory = uiFactory;
             _progressData = progressData;
             _statService = statService;
+            _allStats = allStats;
         }
 
         public void InitGameStateMachine(IGameStateMachine gameStateMachine) =>
@@ -52,7 +54,7 @@ namespace Code.Infrastructure.StateMachine.States
             _statService.Reset();
             await _loadScene.CurtainOnAsync();
             await _loadScene.LoadSceneAsync(sceneName);
-            _progressData.Reset();
+            _progressData.Reset(_allStats);
             await CreateWorld();
             await _statService.CreateStatsUI();
             await _loadScene.CurtainOffAsync();
