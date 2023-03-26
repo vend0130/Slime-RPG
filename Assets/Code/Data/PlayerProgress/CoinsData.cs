@@ -13,6 +13,12 @@ namespace Code.Data.PlayerProgress
             ChangedHandler?.Invoke();
         }
 
+        public void Take(int count)
+        {
+            CoinsCount -= count;
+            ChangedHandler?.Invoke();
+        }
+
         public void Reset()
         {
             CoinsCount = 0;

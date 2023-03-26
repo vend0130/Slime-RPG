@@ -18,13 +18,14 @@ namespace Code.UI
             _statNameText.text = statName.ToUpper();
         }
 
-        public void UpdateDate(string levelText, string number, string coins, bool isLock)
+        public void UpdateDate(string levelText, string number, string coins)
         {
             _levelText.text = $"Lv {levelText}";
             _currentStatNumberText.text = number;
             _coinsText.text = coins;
-
-            _lockButton.SetActive(isLock);
         }
+
+        public void ChangeLock(bool isLock) =>
+            _lockButton.SetActive(isLock);
     }
 }

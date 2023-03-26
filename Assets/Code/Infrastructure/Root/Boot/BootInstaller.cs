@@ -17,7 +17,7 @@ namespace Code.Infrastructure.Root.Boot
     {
         [SerializeField] private CurtainView _curtain;
         [SerializeField] private HeroDefaultData _heroDefaultData;
-        [SerializeField] private StatsData _statsData;
+        [SerializeField] private AllStats allStats;
         [SerializeField] private string _mainSceneName = "Main";
 
         public override void InstallBindings()
@@ -36,7 +36,7 @@ namespace Code.Infrastructure.Root.Boot
         {
             Container.Bind<HeroDefaultData>().FromInstance(_heroDefaultData).AsSingle();
             Container.Bind<PlayerProgressData>().AsSingle();
-            Container.Bind<StatsData>().FromInstance(_statsData).AsSingle();
+            Container.Bind<AllStats>().FromInstance(allStats).AsSingle();
         }
 
         private void BindFactories()

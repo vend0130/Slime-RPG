@@ -5,5 +5,6 @@ namespace Code.Infrastructure.Services.Stats
     public interface IStatService
     {
         UniTask CreateStatsUI();
+        void Reset();
     }
 }

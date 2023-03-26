@@ -1,4 +1,5 @@
-﻿using Code.Infrastructure.Factories.Game;
+﻿using Code.Data.PlayerProgress;
+using Code.Infrastructure.Factories.Game;
 using UnityEngine;
 
 namespace Code.Game.Hero
@@ -14,9 +15,13 @@ namespace Code.Game.Hero
 
         private IGameFactory _gameFactory;
         private float _timeNextAttack;
+        private StatProgressData _attackData;
 
-        public void InitFactory(IGameFactory gameFactory) =>
+        public void Init(IGameFactory gameFactory, PlayerProgressData playerProgressData)
+        {
             _gameFactory = gameFactory;
+            _attackData = playerProgressData.StatsProgressData.AttackData;
+        }
 
         public bool IsAttack(Transform target) =>
             Vector3.Distance(_heroComponent.Current.position, target.position) < _distanceToAttack;
@@ -35,7 +40,7 @@ namespace Code.Game.Hero
 
             targetPoint.y = sphereSpawnPoint.y;
 
-            _gameFactory.CreateSphere(_damage, sphereSpawnPoint, targetPoint);
+            _gameFactory.CreateSphere(_attackData.Number, sphereSpawnPoint, targetPoint);
         }
     }
 }

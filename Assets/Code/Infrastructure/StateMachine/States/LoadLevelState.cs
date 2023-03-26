@@ -49,6 +49,7 @@ namespace Code.Infrastructure.StateMachine.States
 
         public async void Enter(string sceneName)
         {
+            _statService.Reset();
             await _loadScene.CurtainOnAsync();
             await _loadScene.LoadSceneAsync(sceneName);
             _progressData.Reset();

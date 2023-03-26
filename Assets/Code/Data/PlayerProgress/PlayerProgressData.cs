@@ -3,18 +3,15 @@
     public class PlayerProgressData
     {
         public CoinsData CoinsData { get; private set; }
+        public StatsProgressData StatsProgressData { get; private set; }
 
-        private readonly HeroDefaultData _defaultData;
-
-        public PlayerProgressData(HeroDefaultData defaultData)
+        public PlayerProgressData(AllStats allStats)
         {
-            _defaultData = defaultData;
             CoinsData = new CoinsData();
+            StatsProgressData = new StatsProgressData(allStats);
         }
 
-        public void Reset()
-        {
+        public void Reset() =>
             CoinsData.Reset();
-        }
     }
 }

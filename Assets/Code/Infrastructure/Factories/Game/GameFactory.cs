@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Code.Data.PlayerProgress;
 using Code.Extensions;
 using Code.Game;
 using Code.Game.Hero;
@@ -16,16 +17,19 @@ namespace Code.Infrastructure.Factories.Game
         private readonly IAssetsProvider _assetsProvider;
         private readonly IEnemiesPoolable _enemiesPool;
         private readonly IUIFactory _uiFactory;
+        private readonly PlayerProgressData _playerProgressData;
         private readonly Vector3 _spawnPoint = new Vector3(-3.25f, 0f, 0f);
 
         private List<SphereMove> _spheres;
         private Transform _parentForSpheres;
 
-        public GameFactory(IAssetsProvider assetsProvider, IEnemiesPoolable enemiesPool, IUIFactory uiFactory)
+        public GameFactory(IAssetsProvider assetsProvider, IEnemiesPoolable enemiesPool,
+            IUIFactory uiFactory, PlayerProgressData playerProgressData)
         {
             _assetsProvider = assetsProvider;
             _enemiesPool = enemiesPool;
             _uiFactory = uiFactory;
+            _playerProgressData = playerProgressData;
         }
 
         public HeroComponent CreateHero()
@@ -35,7 +39,7 @@ namespace Code.Infrastructure.Factories.Game
             var hero = _assetsProvider.Instantiate(AssetPath.HeroPath, _spawnPoint);
 
             hero.GetComponentInChildren<HeroHealth>().InitFactory(_uiFactory);
-            hero.GetComponent<HeroAttack>().InitFactory(this);
+            hero.GetComponent<HeroAttack>().Init(this, _playerProgressData);
 
             var heroComponent = hero.GetComponent<HeroComponent>();
             heroComponent.InitEnemiesPool(_enemiesPool);
