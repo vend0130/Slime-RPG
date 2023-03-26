@@ -8,11 +8,23 @@ namespace Code.Game.Enemies
         [field: SerializeField] public Transform Current { get; private set; }
 
         public event Action<Transform> SetTargetHandler;
+        public event Action<EnemyComponent> DieHandler;
 
-        public void SetTarget(Transform target)
+        private Transform _target;
+
+        public void SetTarget(Transform target) =>
+            _target = target;
+
+        public void StartMove()
         {
-            SetTargetHandler?.Invoke(target);
+            SetTargetHandler?.Invoke(_target);
             gameObject.SetActive(true);
+        }
+
+        public void Die()
+        {
+            DieHandler?.Invoke(this);
+            Destroy(gameObject);
         }
     }
 }

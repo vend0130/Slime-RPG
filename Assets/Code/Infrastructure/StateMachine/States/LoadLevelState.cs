@@ -56,8 +56,8 @@ namespace Code.Infrastructure.StateMachine.States
         private void CreateEnemies(Transform hero)
         {
             _enemiesFactory.Warmup();
-            _enemiesFactory.Create(null);
             _enemiesFactory.InitHero(hero);
+            _enemiesFactory.Create();
         }
     }
 }

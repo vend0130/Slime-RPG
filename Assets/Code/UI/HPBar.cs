@@ -7,10 +7,7 @@ namespace Code.UI
     {
         [SerializeField] private Image _currentImage;
 
-        public void SetValue(float current, float max)
-        {
-            gameObject.SetActive(true);
+        public void SetValue(float current, float max) =>
             _currentImage.fillAmount = current / max;
-        }
     }
 }

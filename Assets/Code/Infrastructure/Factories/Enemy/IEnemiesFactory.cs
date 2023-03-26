@@ -8,7 +8,7 @@ namespace Code.Infrastructure.Factories.Enemy
     {
         void InitLevel(EnemiesSpawnPoint spawnPoint, LevelConfig levelConfig);
         void Warmup();
-        void Create(Transform target);
+        void Create();
         void InitHero(Transform target);
     }
 }
