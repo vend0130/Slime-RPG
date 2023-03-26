@@ -32,7 +32,10 @@ namespace Code.Game.Enemies
         private void Update()
         {
             if (_target == null)
+            {
+                IsAttack = false;
                 return;
+            }
 
             ChangeAttackState();
 

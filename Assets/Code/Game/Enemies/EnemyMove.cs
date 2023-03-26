@@ -17,7 +17,10 @@ namespace Code.Game.Enemies
         private void Update()
         {
             if (_target == null)
+            {
+                _animator.Move(false);
                 return;
+            }
 
             if (!_attack.IsAttack)
             {

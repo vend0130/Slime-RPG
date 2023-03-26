@@ -11,7 +11,6 @@ namespace Code.Game.Hero
         [SerializeField] private Transform _sphereSpawnPoint;
         [SerializeField] private float _distanceToAttack = 7f;
         [SerializeField] private float _cooldown = .5f; //TODO
-        [SerializeField] private float _damage = 20; //TODO
 
         private IGameFactory _gameFactory;
         private float _timeNextAttack;

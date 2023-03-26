@@ -21,11 +21,15 @@ MonoBehaviour:
     <EnemiesHp>k__BackingField: 45
     <EnemiesDamage>k__BackingField: 30
     <DropCoinsCount>k__BackingField: 100
-  - <EnemiesCount>k__BackingField: 4
-    <EnemiesHp>k__BackingField: 45
-    <EnemiesDamage>k__BackingField: 30
+  - <EnemiesCount>k__BackingField: 3
+    <EnemiesHp>k__BackingField: 200
+    <EnemiesDamage>k__BackingField: 50
     <DropCoinsCount>k__BackingField: 100
-  - <EnemiesCount>k__BackingField: 1
+  - <EnemiesCount>k__BackingField: 4
     <EnemiesHp>k__BackingField: 200
     <EnemiesDamage>k__BackingField: 100
-    <DropCoinsCount>k__BackingField: 500
+    <DropCoinsCount>k__BackingField: 100
+  - <EnemiesCount>k__BackingField: 3
+    <EnemiesHp>k__BackingField: 1000
+    <EnemiesDamage>k__BackingField: 200
+    <DropCoinsCount>k__BackingField: 100

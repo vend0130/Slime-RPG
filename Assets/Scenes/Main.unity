@@ -681,11 +681,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9206358553520504947, guid: c1090719dd9612244a3c008000885a5d, type: 3}
       propertyPath: <XPointRange>k__BackingField
-      value: 0.5
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 9206358553520504947, guid: c1090719dd9612244a3c008000885a5d, type: 3}
       propertyPath: <ZPointRange>k__BackingField
-      value: 3.1
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

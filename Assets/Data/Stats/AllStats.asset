@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4567dbb6591b4b30918eccd8445ffb67, type: 3}
   m_Name: AllStats
   m_EditorClassIdentifier: 
-  <AttackStat>k__BackingField: {fileID: 11400000, guid: 32f80e3c0c2c3fe479a0d19ab693a8fc, type: 2}
+  <Attack>k__BackingField: {fileID: 11400000, guid: 32f80e3c0c2c3fe479a0d19ab693a8fc, type: 2}
