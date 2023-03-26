@@ -41,7 +41,7 @@ namespace Code.UI
             _sequence = DOTween.Sequence();
 
             _sequence.Append(transform.DOMoveY(transform.position.y + _targetPointMove, _duration).SetEase(_ease));
-            _sequence.Join(_textMeshProUGUI.DOFade(0, _duration).SetEase(_ease));
+            _sequence.Join(_textMeshProUGUI.DOFade(0, _duration).SetEase(Ease.InCubic));
 
             _sequence.OnComplete(() =>
             {

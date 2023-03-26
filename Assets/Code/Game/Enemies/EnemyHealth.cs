@@ -8,7 +8,7 @@ namespace Code.Game.Enemies
     {
         [SerializeField] private EnemyComponent _enemyComponent;
         [SerializeField] private HPBar _hpBar;
-        [SerializeField] private Vector3 _offsetTakeDamage = new Vector3(0, 1.6f, 0);
+        private Vector3 _offsetTakeDamage = new Vector3(0, 2.2f, 0);
         [SerializeField] private Vector3 _offsetCoins = new Vector3(0, .8f, 0);
 
         private IUIFactory _uiFactory;

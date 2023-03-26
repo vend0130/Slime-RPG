@@ -88,8 +88,6 @@ namespace Code.Infrastructure.Factories.UI
             int count = Random.Range(MinDropCoins, MaxDropCoins + 1);
             List<RectTransform> coins = new List<RectTransform>(count);
 
-            RectTransform coin;
-
             for (int i = 0; i < count; i++)
                 DropCoin(coins, worldPosition);
 
