@@ -1,4 +1,5 @@
-﻿using Code.Infrastructure.Factories.Enemy;
+﻿using System;
+using Code.Infrastructure.Factories.Enemy;
 using UnityEngine;
 
 namespace Code.Game.Hero
@@ -10,6 +11,8 @@ namespace Code.Game.Hero
         [SerializeField] private HeroRotation _rotation;
         [SerializeField] private HeroAttack _attack;
         [SerializeField] private HeroMove _heroMove;
+
+        public event Action DieHandler;
 
         private IEnemiesPoolable _enemiesPoolable;
         private bool _isMove;
@@ -27,6 +30,9 @@ namespace Code.Game.Hero
 
         public void StartMove() =>
             _isMove = true;
+
+        public void Die() =>
+            DieHandler?.Invoke();
 
         private void StateMove()
         {

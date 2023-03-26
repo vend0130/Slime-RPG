@@ -24,7 +24,7 @@ namespace Code.Infrastructure.Root.Boot
             BindFactories();
 
             Container.Bind<HeroDefaultData>().FromInstance(_heroDefaultData).AsSingle();
-            
+
             Container.BindInterfacesTo<BootInstaller>().FromInstance(this).AsSingle();
         }
 
@@ -41,6 +41,7 @@ namespace Code.Infrastructure.Root.Boot
             Container.Bind<IGameStateMachine>().To<GameStateMachine>().AsSingle();
             Container.Bind<LoadLevelState>().AsSingle();
             Container.Bind<GameLoopState>().AsSingle();
+            Container.Bind<EndGameState>().AsSingle();
         }
 
         private void BindLoaderScene()

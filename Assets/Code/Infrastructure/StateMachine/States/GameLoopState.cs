@@ -5,7 +5,6 @@ using Code.Game;
 using Code.Game.Enemies;
 using Code.Game.Hero;
 using Code.Infrastructure.Factories.Enemy;
-using UnityEngine;
 
 namespace Code.Infrastructure.StateMachine.States
 {
@@ -18,9 +17,13 @@ namespace Code.Infrastructure.StateMachine.States
         private List<EnemyComponent> _enemiesInWave;
         private int _currentWave = 0;
         private CameraFollow _cameraFollow;
+        private IGameStateMachine _stateMachine;
 
         public GameLoopState(IEnemiesPoolable enemiesPool) =>
             _enemiesPool = enemiesPool;
+
+        public void InitGameStateMachine(IGameStateMachine stateMachine) =>
+            _stateMachine = stateMachine;
 
         public void InitLevel(LevelConfig levelConfig, CameraFollow cameraFollow)
         {
@@ -34,21 +37,27 @@ namespace Code.Infrastructure.StateMachine.States
             _cameraFollow.InitTarget(_hero.Current);
             _currentWave = 0;
             StartWave();
+
+            _hero.DieHandler += HeroDie;
         }
+
+        public void Dispose() =>
+            Exit();
 
         public void Exit()
         {
             UnSubscribe();
+            _hero.DieHandler -= HeroDie;
         }
 
-        public void Dispose() =>
-            UnSubscribe();
+        private void HeroDie() =>
+            _stateMachine.Enter<EndGameState, EndGameType>(EndGameType.Loss);
 
         private void AllEnemiesInCurrentWaveDie()
         {
             if (_currentWave >= _levelConfig.Waves.Length)
             {
-                Debug.Log("YOU WIN!");
+                _stateMachine.Enter<EndGameState, EndGameType>(EndGameType.Win);
                 return;
             }
 

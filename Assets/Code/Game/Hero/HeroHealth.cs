@@ -35,6 +35,7 @@ namespace Code.Game.Hero
 
             if (_currentHp <= 0)
             {
+                _heroComponent.Die();
                 Destroy(gameObject);
             }
         }
