@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
 
 namespace Code.Infrastructure.Services.Stats
 {
@@ -6,5 +7,6 @@ namespace Code.Infrastructure.Services.Stats
     {
         UniTask CreateStatsUI();
         void Reset();
+        event Action HpChangedHandler;
     }
 }

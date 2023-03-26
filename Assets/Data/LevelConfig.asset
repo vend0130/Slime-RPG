@@ -27,7 +27,7 @@ MonoBehaviour:
     <DropCoinsCount>k__BackingField: 100
   - <EnemiesCount>k__BackingField: 4
     <EnemiesHp>k__BackingField: 200
-    <EnemiesDamage>k__BackingField: 100
+    <EnemiesDamage>k__BackingField: 80
     <DropCoinsCount>k__BackingField: 100
   - <EnemiesCount>k__BackingField: 3
     <EnemiesHp>k__BackingField: 1000

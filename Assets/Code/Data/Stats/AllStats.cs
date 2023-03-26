@@ -6,5 +6,6 @@ namespace Code.Data
     public class AllStats : ScriptableObject
     {
         [field: SerializeField] public StatData Attack { get; private set; }
+        [field: SerializeField] public StatData HP { get; private set; }
     }
 }

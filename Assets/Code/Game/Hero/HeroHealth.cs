@@ -1,4 +1,7 @@
-﻿using Code.Infrastructure.Factories.UI;
+﻿using System;
+using Code.Data.PlayerProgress;
+using Code.Infrastructure.Factories.UI;
+using Code.Infrastructure.Services.Stats;
 using Code.UI;
 using UnityEngine;
 
@@ -8,12 +11,14 @@ namespace Code.Game.Hero
     {
         [SerializeField] private HeroComponent _heroComponent;
         [SerializeField] private HPBar _hpBar;
-        [SerializeField] private float _maxHp = 100;
+        [SerializeField] private float _maxHp;
         [SerializeField] private float _currentHp;
 
         private readonly Vector3 _offset = new Vector3(0, 1.6f, 0);
 
         private IUIFactory _uiFactory;
+        private StatProgressData _hpData;
+        private IStatService _statService;
 
         private void Awake()
         {
@@ -21,8 +26,28 @@ namespace Code.Game.Hero
             _hpBar.SetValue(_currentHp, _maxHp);
         }
 
-        public void InitFactory(IUIFactory uiFactory) =>
+        private void OnDestroy() =>
+            _statService.HpChangedHandler -= ChangedHP;
+
+        public void Init(IUIFactory uiFactory, PlayerProgressData playerProgressData, IStatService statService)
+        {
             _uiFactory = uiFactory;
+            _hpData = playerProgressData.StatsProgressData.HPData;
+            _statService = statService;
+
+            _statService.HpChangedHandler += ChangedHP;
+        }
+
+        private void ChangedHP()
+        {
+            float currentMax = _maxHp;
+            _maxHp = _hpData.Number;
+
+            float multiply = (_maxHp * 100 / currentMax) / 100;
+            _currentHp *= multiply;
+
+            _hpBar.SetValue(_currentHp, _maxHp);
+        }
 
         public void TakeDamage(float damage)
         {

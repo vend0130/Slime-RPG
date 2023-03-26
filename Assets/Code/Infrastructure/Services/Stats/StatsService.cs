@@ -13,6 +13,8 @@ namespace Code.Infrastructure.Services.Stats
 {
     public class StatsService : IStatService, IInitializable, IDisposable
     {
+        public event Action HpChangedHandler;
+
         private readonly PlayerProgressData _playerProgressData;
         private readonly IUIFactory _uiFactory;
         private readonly AllStats _allStats;
@@ -20,6 +22,7 @@ namespace Code.Infrastructure.Services.Stats
 
         private List<(StatView, StatProgressData)> _stats;
         private StatView _attackStat;
+        private StatView _hpStat;
 
         public StatsService(PlayerProgressData playerProgressData, IUIFactory uiFactory, AllStats allStats)
         {
@@ -46,6 +49,7 @@ namespace Code.Infrastructure.Services.Stats
                 return;
 
             _attackStat.EnhanceButton.onClick.RemoveListener(EnhanceAttack);
+            _hpStat.EnhanceButton.onClick.RemoveListener(EnhanceHP);
         }
 
         public async UniTask CreateStatsUI()
@@ -54,6 +58,9 @@ namespace Code.Infrastructure.Services.Stats
 
             _attackStat = CreateStat(statsUI.Parent, _playerProgressData.StatsProgressData.AttackData);
             _attackStat.EnhanceButton.onClick.AddListener(EnhanceAttack);
+
+            _hpStat = CreateStat(statsUI.Parent, _playerProgressData.StatsProgressData.HPData);
+            _hpStat.EnhanceButton.onClick.AddListener(EnhanceHP);
 
             await UniTask.Yield(cancellationToken: _tokenSource.Token);
         }
@@ -83,16 +90,25 @@ namespace Code.Infrastructure.Services.Stats
                 stat.Item1.ChangeLock(LockButton(stat.Item2.Price));
         }
 
-        private void EnhanceAttack()
+        private void EnhanceAttack() =>
+            EnhanceStat(_playerProgressData.StatsProgressData.AttackData, _allStats.Attack, _attackStat);
+
+        private void EnhanceHP()
         {
-            if (LockButton(_playerProgressData.StatsProgressData.AttackData.Price))
+            EnhanceStat(_playerProgressData.StatsProgressData.HPData, _allStats.HP, _hpStat);
+            HpChangedHandler?.Invoke();
+        }
+
+        private void EnhanceStat(StatProgressData statsProgress, StatData statData, StatView stat)
+        {
+            if (LockButton(statsProgress.Price))
                 return;
 
-            _playerProgressData.StatsProgressData.AttackData.Number += _allStats.Attack.EnhanceNumber;
-            _playerProgressData.StatsProgressData.AttackData.Price += _allStats.Attack.EnhancePrice;
-            _playerProgressData.CoinsData.Take(_allStats.Attack.EnhancePrice);
+            _playerProgressData.CoinsData.Take(statsProgress.Price);
+            statsProgress.Number += statData.EnhanceNumber;
+            statsProgress.Price += statData.EnhancePrice;
 
-            UpdateStat(_attackStat, _playerProgressData.StatsProgressData.AttackData);
+            UpdateStat(stat, statsProgress);
         }
 
         private void UpdateStat(StatView stat, StatProgressData statData)

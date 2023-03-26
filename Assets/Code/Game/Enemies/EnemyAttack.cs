@@ -14,7 +14,7 @@ namespace Code.Game.Enemies
 
         private const float Cleavage = .25f;
         private const string HeroLayerName = "Hero";
-        private readonly Collider[] _hits = new Collider[1];
+        private readonly Collider[] _hits = new Collider[3];
 
         private float _damage;
         private float _timeNextAttack;
