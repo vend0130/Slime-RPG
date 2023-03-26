@@ -64,6 +64,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4885079432260988, guid: a817c29ea6847604bb2c6c51d9a74bf1, type: 3}
   m_PrefabInstance: {fileID: 1035603733200042450}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1034961051353479810 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1090219386143568, guid: a817c29ea6847604bb2c6c51d9a74bf1, type: 3}
+  m_PrefabInstance: {fileID: 1035603733200042450}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &163958324122227929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034961051353479810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07cf7d69268e4475b42a580acfb1d32e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 1084271164112021868}
+--- !u!95 &1084271164112021868 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95471671811264702, guid: a817c29ea6847604bb2c6c51d9a74bf1, type: 3}
+  m_PrefabInstance: {fileID: 1035603733200042450}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7954969382910205925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -125,6 +148,10 @@ PrefabInstance:
       value: Slime
       objectReference: {fileID: 0}
     - target: {fileID: 4102737090546201264, guid: d48d133268688b24493d9ba579466134, type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 163958324122227929}
+    - target: {fileID: 4102737090546201264, guid: d48d133268688b24493d9ba579466134, type: 3}
       propertyPath: _distanceToAttack
       value: 7.25
       objectReference: {fileID: 0}
@@ -139,6 +166,14 @@ PrefabInstance:
     - target: {fileID: 6651354919322189399, guid: d48d133268688b24493d9ba579466134, type: 3}
       propertyPath: m_Radius
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886847185092344629, guid: d48d133268688b24493d9ba579466134, type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 163958324122227929}
+    - target: {fileID: 7927696713769647150, guid: d48d133268688b24493d9ba579466134, type: 3}
+      propertyPath: _speed
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects:

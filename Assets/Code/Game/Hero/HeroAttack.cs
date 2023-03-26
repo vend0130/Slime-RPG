@@ -5,10 +5,11 @@ namespace Code.Game.Hero
 {
     public class HeroAttack : MonoBehaviour
     {
+        [SerializeField] private HeroAnimator _animator;
         [SerializeField] private HeroComponent _heroComponent;
         [SerializeField] private Transform _sphereSpawnPoint;
         [SerializeField] private float _distanceToAttack = 7f;
-        [SerializeField] private float _cooldown = .5f;//TODO
+        [SerializeField] private float _cooldown = .5f; //TODO
         [SerializeField] private float _damage = 20; //TODO
 
         private IGameFactory _gameFactory;
@@ -17,12 +18,15 @@ namespace Code.Game.Hero
         public void InitFactory(IGameFactory gameFactory) =>
             _gameFactory = gameFactory;
 
+        public bool IsAttack(Transform target) => 
+            Vector3.Distance(_heroComponent.Current.position, target.position) < _distanceToAttack;
+
         public void Attack(Transform target)
         {
-            float distance = Vector3.Distance(_heroComponent.Current.position, target.position);
-            
-            if (_timeNextAttack > Time.time || distance > _distanceToAttack)
+            if (_timeNextAttack > Time.time)
                 return;
+
+            _animator.Attack();
 
             _timeNextAttack = Time.time + _cooldown;
 

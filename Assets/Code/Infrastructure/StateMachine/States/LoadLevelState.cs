@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using Code.Game.Hero;
 using Code.Infrastructure.Factories.Enemy;
 using Code.Infrastructure.Factories.Game;
 using Code.Infrastructure.Services.LoadScene;
@@ -16,6 +17,7 @@ namespace Code.Infrastructure.StateMachine.States
         private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
 
         private IGameStateMachine _gameStateMachine;
+        private HeroComponent _hero;
 
         public LoadLevelState(ILoaderScene loadScene, IGameFactory gameFactory, IEnemiesFactory enemiesFactory)
         {
@@ -39,7 +41,7 @@ namespace Code.Infrastructure.StateMachine.States
             await _loadScene.LoadSceneAsync(sceneName);
             await CreateWorld();
             await _loadScene.CurtainOffAsync();
-            _gameStateMachine.Enter<GameLoopState>();
+            _gameStateMachine.Enter<GameLoopState, HeroComponent>(_hero);
         }
 
         public void Exit()
@@ -48,8 +50,8 @@ namespace Code.Infrastructure.StateMachine.States
 
         private async UniTask CreateWorld()
         {
-            GameObject hero = _gameFactory.CreateHero();
-            CreateEnemies(hero.transform);
+            _hero = _gameFactory.CreateHero();
+            CreateEnemies(_hero.Current);
             await UniTask.Yield(cancellationToken: _cancellationToken.Token);
         }
 

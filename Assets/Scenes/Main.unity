@@ -958,6 +958,7 @@ GameObject:
   - component: {fileID: 1022071348}
   - component: {fileID: 1022071350}
   - component: {fileID: 1022071349}
+  - component: {fileID: 1022071351}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1032,6 +1033,20 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1022071351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022071347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 012c1521987e41e39f96b6ead933224d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _camera: {fileID: 1022071348}
+  _speed: 5
 --- !u!1001 &1067070190
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1168,6 +1183,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9206358553520504947, guid: c1090719dd9612244a3c008000885a5d, type: 3}
+      propertyPath: <XPointRange>k__BackingField
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9206358553520504947, guid: c1090719dd9612244a3c008000885a5d, type: 3}
+      propertyPath: <ZPointRange>k__BackingField
+      value: 3.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: c1090719dd9612244a3c008000885a5d, type: 3}
@@ -1253,6 +1276,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 1078653721}
   _levelConfig: {fileID: 11400000, guid: 33cb8868437eac64e82b4ad5b0fbeec6, type: 2}
   _camera: {fileID: 1022071350}
+  _cameraFollow: {fileID: 1022071351}
 --- !u!1001 &1496877604
 PrefabInstance:
   m_ObjectHideFlags: 0

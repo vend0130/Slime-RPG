@@ -1,12 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Code.Game.Hero
 {
     public class HeroRotation : MonoBehaviour
     {
-        [SerializeField] private HeroComponent _heroComponent;
+        [SerializeField] private Transform _transform;
+        [SerializeField] private Vector3 _defaultRotation = new Vector3(0, 90, 0);
 
         public void Look(Vector3 at) =>
-            _heroComponent.Current.LookAt(at);
+            _transform.LookAt(at);
+
+        public void Reset() => 
+            _transform.eulerAngles = _defaultRotation;
     }
 }

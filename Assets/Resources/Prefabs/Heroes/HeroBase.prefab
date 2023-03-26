@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3170281714777668591}
   - component: {fileID: 8828515813681271203}
   - component: {fileID: 4102737090546201264}
+  - component: {fileID: 7927696713769647150}
   m_Layer: 7
   m_Name: HeroBase
   m_TagString: Untagged
@@ -66,8 +67,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Current>k__BackingField: {fileID: 502281611278541754}
+  _animator: {fileID: 0}
   _rotation: {fileID: 8828515813681271203}
   _attack: {fileID: 4102737090546201264}
+  _heroMove: {fileID: 7927696713769647150}
 --- !u!114 &3170281714777668591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f842bfe4454a9ea9fce6c376d90efa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _heroComponent: {fileID: 6886847185092344629}
+  _transform: {fileID: 5269005457922659366}
 --- !u!114 &4102737090546201264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,11 +112,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bf171dfadd84a21b356f8aa51ad792c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
   _heroComponent: {fileID: 6886847185092344629}
   _sphereSpawnPoint: {fileID: 4387267263020011936}
   _distanceToAttack: 7
   _cooldown: 0.5
   _damage: 20
+--- !u!114 &7927696713769647150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3527995367152801391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38bf32cd2cc45d897471a83ea084a03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _heroComponent: {fileID: 6886847185092344629}
+  _speed: 2
 --- !u!1 &4777654454179996004
 GameObject:
   m_ObjectHideFlags: 0

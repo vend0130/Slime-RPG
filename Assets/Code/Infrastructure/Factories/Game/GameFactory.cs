@@ -28,17 +28,19 @@ namespace Code.Infrastructure.Factories.Game
             _uiFactory = uiFactory;
         }
 
-        public GameObject CreateHero()
+        public HeroComponent CreateHero()
         {
             _spheres = new List<SphereMove>();
 
             var hero = _assetsProvider.Instantiate(AssetPath.HeroPath, _spawnPoint);
 
             hero.GetComponentInChildren<HeroHealth>().InitFactory(_uiFactory);
-            hero.GetComponent<HeroComponent>().InitEnemiesPool(_enemiesPool);
             hero.GetComponent<HeroAttack>().InitFactory(this);
 
-            return hero;
+            var heroComponent = hero.GetComponent<HeroComponent>();
+            heroComponent.InitEnemiesPool(_enemiesPool);
+
+            return heroComponent;
         }
 
         public void CreateSphere(float damage, Vector3 startPoint, Vector3 targetPoint)

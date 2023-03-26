@@ -1,4 +1,5 @@
 ﻿using Code.Data.Level;
+using Code.Game;
 using Code.Game.Enemies;
 using UnityEngine;
 using Zenject;
@@ -10,6 +11,7 @@ namespace Code.Infrastructure.Root.Level
         [SerializeField] private EnemiesSpawnPoint spawnPoint;
         [SerializeField] private LevelConfig _levelConfig;
         [SerializeField] private Camera _camera;
+        [SerializeField] private CameraFollow _cameraFollow;
 
         public override void InstallBindings()
         {
@@ -23,6 +25,7 @@ namespace Code.Infrastructure.Root.Level
             Container.Bind<EnemiesSpawnPoint>().FromInstance(spawnPoint).AsSingle();
             Container.Bind<LevelConfig>().FromInstance(_levelConfig).AsSingle();
             Container.Bind<Camera>().FromInstance(_camera).AsSingle();
+            Container.Bind<CameraFollow>().FromInstance(_cameraFollow).AsSingle();
         }
     }
 }

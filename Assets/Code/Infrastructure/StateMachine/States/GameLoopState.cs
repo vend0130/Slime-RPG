@@ -1,28 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using Code.Data.Level;
+using Code.Game;
 using Code.Game.Enemies;
+using Code.Game.Hero;
 using Code.Infrastructure.Factories.Enemy;
 using UnityEngine;
 
 namespace Code.Infrastructure.StateMachine.States
 {
-    public class GameLoopState : IDefaultState, IDisposable
+    public class GameLoopState : IPayloadState<HeroComponent>, IDisposable
     {
         private readonly IEnemiesPoolable _enemiesPool;
 
+        private HeroComponent _hero;
         private LevelConfig _levelConfig;
         private List<EnemyComponent> _enemiesInWave;
         private int _currentWave = 0;
+        private CameraFollow _cameraFollow;
 
         public GameLoopState(IEnemiesPoolable enemiesPool) =>
             _enemiesPool = enemiesPool;
 
-        public void InitLevelConfig(LevelConfig levelConfig) =>
-            _levelConfig = levelConfig;
-
-        public void Enter()
+        public void InitLevel(LevelConfig levelConfig, CameraFollow cameraFollow)
         {
+            _levelConfig = levelConfig;
+            _cameraFollow = cameraFollow;
+        }
+
+        public void Enter(HeroComponent hero)
+        {
+            _hero = hero;
+            _cameraFollow.InitTarget(_hero.Current);
             _currentWave = 0;
             StartWave();
         }
@@ -43,6 +52,7 @@ namespace Code.Infrastructure.StateMachine.States
                 return;
             }
 
+            _hero.StartMove();
             StartWave();
         }
 
