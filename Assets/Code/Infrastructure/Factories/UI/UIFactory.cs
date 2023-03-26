@@ -25,8 +25,7 @@ namespace Code.Infrastructure.Factories.UI
         private Camera _camera;
         private CoinsUI _coinsUI;
         private List<RectTransform> _coins;
-
-
+        private StatsUI _statsUI;
 
         public UIFactory(IAssetsProvider assetsProvider, PlayerProgressData progressData)
         {
@@ -58,7 +57,8 @@ namespace Code.Infrastructure.Factories.UI
                 ? CreateText()
                 : _takeDamageTexts.GetAndDeleteElement();
 
-            textObject.StartEffect(ConvertWorldToCanvasPosition(worldPosition, _takeDamageUI.sizeDelta), $"{damage}");
+            textObject.StartEffect(ConvertWorldToCanvasPosition(worldPosition, _takeDamageUI.sizeDelta),
+                ((int)damage).ToString());
         }
 
         public void BackToPool(TakeDamageText text) =>
@@ -99,8 +99,11 @@ namespace Code.Infrastructure.Factories.UI
         public void CoinsBackToPool(List<RectTransform> coins) =>
             _coins.AddRange(coins);
 
-        public StatsUI CreateStatsUI() => 
-            _assetsProvider.Instantiate(AssetPath.StatsUIPath, Vector3.zero).GetComponent<StatsUI>();
+        public StatsUI CreateStatsUI()
+        {
+            _statsUI = _assetsProvider.Instantiate(AssetPath.StatsUIPath, Vector3.zero).GetComponent<StatsUI>();
+            return _statsUI;
+        }
 
         public GameObject CreateStatUI(Transform parent) =>
             _assetsProvider.Instantiate(AssetPath.StatUIPath, parent);
@@ -108,6 +111,7 @@ namespace Code.Infrastructure.Factories.UI
         public void UnSpawn()
         {
             _coinsUI.Destroy();
+            _statsUI.Reset();
         }
 
         private void DropCoin(List<RectTransform> coins, Vector3 worldPosition)
@@ -121,6 +125,9 @@ namespace Code.Infrastructure.Factories.UI
                 coin = CreateCoin();
                 coins.Add(coin);
             }
+
+            if (_coinsUI == null)
+                return;
 
             Vector2 position = Random.insideUnitCircle * DropCoinsRadius +
                                ConvertWorldToCanvasPosition(worldPosition, _coinsUI.SizeDelta);

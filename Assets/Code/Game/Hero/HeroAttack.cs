@@ -3,6 +3,7 @@ using Code.Data.PlayerProgress;
 using Code.Infrastructure.Factories.Game;
 using Code.Infrastructure.Services.Stats;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Code.Game.Hero
 {
@@ -50,7 +51,14 @@ namespace Code.Game.Hero
 
             targetPoint.y = sphereSpawnPoint.y;
 
-            _gameFactory.CreateSphere(_statsProgress.AttackData.Number, sphereSpawnPoint, targetPoint);
+            float damage = _statsProgress.AttackData.Number;
+
+            if (Random.value < (_statsProgress.CriticalChanceData.Number / 100))
+            {
+                damage += damage * (_statsProgress.CriticalHitDamageData.Number / 100);
+            }
+
+            _gameFactory.CreateSphere(damage, sphereSpawnPoint, targetPoint);
         }
 
         private void CooldownChange()

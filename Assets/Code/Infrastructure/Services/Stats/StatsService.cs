@@ -26,6 +26,8 @@ namespace Code.Infrastructure.Services.Stats
         private StatView _attackStat;
         private StatView _hpStat;
         private StatView _aspdStat;
+        private StatView _criticalChanceStat;
+        private StatView _criticalDamageStat;
 
         public StatsService(PlayerProgressData playerProgressData, IUIFactory uiFactory, AllStats allStats)
         {
@@ -54,6 +56,8 @@ namespace Code.Infrastructure.Services.Stats
             _attackStat.EnhanceButton.onClick.RemoveListener(EnhanceAttack);
             _hpStat.EnhanceButton.onClick.RemoveListener(EnhanceHP);
             _aspdStat.EnhanceButton.onClick.RemoveListener(EnhanceASPD);
+            _criticalChanceStat.EnhanceButton.onClick.RemoveListener(EnhanceCriticalChance);
+            _criticalDamageStat.EnhanceButton.onClick.RemoveListener(EnhanceCriticalDamage);
         }
 
         public async UniTask CreateStatsUI()
@@ -68,6 +72,13 @@ namespace Code.Infrastructure.Services.Stats
 
             _aspdStat = CreateStat(statsUI.Parent, _playerProgressData.StatsProgressData.ASPDData);
             _aspdStat.EnhanceButton.onClick.AddListener(EnhanceASPD);
+
+            _criticalChanceStat = CreateStat(statsUI.Parent, _playerProgressData.StatsProgressData.CriticalChanceData);
+            _criticalChanceStat.EnhanceButton.onClick.AddListener(EnhanceCriticalChance);
+
+            _criticalDamageStat =
+                CreateStat(statsUI.Parent, _playerProgressData.StatsProgressData.CriticalHitDamageData);
+            _criticalDamageStat.EnhanceButton.onClick.AddListener(EnhanceCriticalDamage);
 
             await UniTask.Yield(cancellationToken: _tokenSource.Token);
         }
@@ -103,6 +114,14 @@ namespace Code.Infrastructure.Services.Stats
             ASPDChangedHandler?.Invoke();
         }
 
+        private void EnhanceCriticalChance() =>
+            EnhanceStat(_playerProgressData.StatsProgressData.CriticalChanceData,
+                _allStats.CriticalChance, _criticalChanceStat);
+
+        private void EnhanceCriticalDamage() =>
+            EnhanceStat(_playerProgressData.StatsProgressData.CriticalHitDamageData,
+                _allStats.CriticalHitDamage, _criticalDamageStat);
+
         private void EnhanceStat(StatProgressData statsProgress, StatData statData, StatView stat)
         {
             if (LockButton(statsProgress.Price))
@@ -111,9 +130,16 @@ namespace Code.Infrastructure.Services.Stats
                 return;
             }
 
+            if (statsProgress.Number >= statData.MaxNumber)
+                return;
+
             _playerProgressData.CoinsData.Take(statsProgress.Price);
             statsProgress.Number += statData.EnhanceNumber;
             statsProgress.Price += statData.EnhancePrice;
+            statsProgress.Level++;
+
+            statsProgress.Number =
+                statsProgress.Number > statData.MaxNumber ? statData.MaxNumber : statsProgress.Number;
 
             statsProgress.Number = (float)Math.Round(statsProgress.Number, 2);
 
@@ -132,7 +158,7 @@ namespace Code.Infrastructure.Services.Stats
         private void UpdateStat(StatView stat, StatProgressData statData)
         {
             stat.UpdateDate(statData.Level.ToString(), statData.Number.ToString(CultureInfo.InvariantCulture),
-                statData.Price.ToString());
+                statData.Price.ToString(), statData.IsPercents);
         }
 
         private bool LockButton(int price) =>

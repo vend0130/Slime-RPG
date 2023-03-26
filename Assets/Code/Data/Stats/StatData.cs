@@ -10,6 +10,7 @@ namespace Code.Data
         [field: SerializeField] public int DefaultPrice { get; private set; } = 100;
         [field: SerializeField] public float EnhanceNumber { get; private set; } = 100;
         [field: SerializeField] public int EnhancePrice { get; private set; } = 200;
-        [field: SerializeField] public int MaxLevel { get; private set; } = 10;
+        [field: SerializeField] public int MaxNumber { get; private set; } = 10;
+        [field: SerializeField] public bool IsPecents { get; private set; } = false;
     }
 }

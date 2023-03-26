@@ -15,6 +15,7 @@ MonoBehaviour:
   <Name>k__BackingField: HP
   <DefaultNumber>k__BackingField: 100
   <DefaultPrice>k__BackingField: 100
-  <EnhanceNumber>k__BackingField: 200
+  <EnhanceNumber>k__BackingField: 250
   <EnhancePrice>k__BackingField: 150
-  <MaxLevel>k__BackingField: 10
+  <MaxNumber>k__BackingField: 999999
+  <IsPecents>k__BackingField: 0

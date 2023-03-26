@@ -18,10 +18,10 @@ namespace Code.UI
             _statNameText.text = statName.ToUpper();
         }
 
-        public void UpdateDate(string levelText, string number, string coins)
+        public void UpdateDate(string levelText, string number, string coins, bool isPercents)
         {
             _levelText.text = $"Lv {levelText}";
-            _currentStatNumberText.text = number;
+            _currentStatNumberText.text = $"{number}{(isPercents ? "%" : "")}";
             _coinsText.text = coins;
         }
 

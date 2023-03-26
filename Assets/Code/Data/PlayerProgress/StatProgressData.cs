@@ -6,6 +6,7 @@
         public int Level;
         public float Number;
         public int Price;
+        public bool IsPercents;
 
         public StatProgressData(StatData statData)
         {
@@ -18,6 +19,7 @@
             Level = 1;
             Number = statData.DefaultNumber;
             Price = statData.DefaultPrice;
+            IsPercents = statData.IsPecents;
         }
     }
 }

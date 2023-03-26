@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 3
+  m_ScrollSensitivity: 1
   m_Viewport: {fileID: 0}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 0}
@@ -314,6 +314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Parent>k__BackingField: {fileID: 4719633249378798802}
+  _scroll: {fileID: 4719633248631869719}
 --- !u!1 &4719633249378798803
 GameObject:
   m_ObjectHideFlags: 0

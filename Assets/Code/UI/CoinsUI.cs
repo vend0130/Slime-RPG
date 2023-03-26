@@ -23,13 +23,15 @@ namespace Code.UI
 
         private const Ease EaseType = Ease.Linear;
 
-        private Sequence _sequence;
+        private List<Sequence> _sequences = new List<Sequence>();
         private IUIFactory _uiFactory;
         private CoinsData _coinsData;
 
         private void OnDestroy()
         {
-            _sequence.SimpleKill();
+            foreach (Sequence sequence in _sequences)
+                sequence.SimpleKill();
+
             _coinsData.ChangedHandler -= ChangeCoins;
         }
 
@@ -48,21 +50,32 @@ namespace Code.UI
 
         public void CoinsMoveToBar(List<RectTransform> coins, int coinsCount)
         {
-            _sequence.SimpleKill();
-            _sequence = DOTween.Sequence();
+            var sequence = DOTween.Sequence();
+            _sequences.Add(sequence);
 
-            _sequence.Append(coins[0].DOMove(_target.position, _duration).SetEase(EaseType));
+            if(coins[0] == null)
+                return;
+            
+            sequence.Append(coins[0].DOMove(_target.position, _duration).SetEase(EaseType));
 
             for (int i = 1; i < coins.Count; i++)
-                _sequence.Join(coins[i].DOMove(_target.position, _duration).SetEase(EaseType));
+            {
+                if (coins[i] == null)
+                {
+                    sequence.SimpleKill();
+                    return;
+                }
+                
+                sequence.Join(coins[i].DOMove(_target.position, _duration).SetEase(EaseType));
+            }
 
-            _sequence.OnComplete(() =>
+            sequence.OnComplete(() =>
             {
                 _uiFactory.CoinsBackToPool(coins);
                 _coinsData.Collect(coinsCount);
             });
 
-            _sequence.Play();
+            sequence.Play();
         }
 
         private void ChangeCoins() =>

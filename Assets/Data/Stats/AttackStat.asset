@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: AttackStat
   m_EditorClassIdentifier: 
   <Name>k__BackingField: ATTACK
-  <DefaultAttack>k__BackingField: 25
+  <DefaultNumber>k__BackingField: 15
   <DefaultPrice>k__BackingField: 100
-  <EnhanceAttack>k__BackingField: 100
+  <EnhanceNumber>k__BackingField: 105
   <EnhancePrice>k__BackingField: 200
-  <MaxLevel>k__BackingField: 10
+  <MaxNumber>k__BackingField: 999999
+  <IsPecents>k__BackingField: 0
