@@ -16,10 +16,8 @@ namespace Code.Infrastructure.Services.LoadScene
 
         private Tween _tween;
 
-        private void OnDestroy()
-        {
+        private void OnDestroy() =>
             _tween.SimpleKill();
-        }
 
         public async UniTask FadeOn()
         {
@@ -37,6 +35,7 @@ namespace Code.Infrastructure.Services.LoadScene
         {
             _tween.SimpleKill();
             _tween = _canvasGroup.DOFade(targetValue, duration);
+
             await _tween.AsyncWaitForCompletion();
         }
     }

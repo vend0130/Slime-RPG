@@ -53,18 +53,6 @@ namespace Code.Infrastructure.StateMachine.States
         private void HeroDie() =>
             _stateMachine.Enter<EndGameState, EndGameType>(EndGameType.Loss);
 
-        private void AllEnemiesInCurrentWaveDie()
-        {
-            if (_currentWave >= _levelConfig.Waves.Length)
-            {
-                _stateMachine.Enter<EndGameState, EndGameType>(EndGameType.Win);
-                return;
-            }
-
-            _hero.StartMove();
-            StartWave();
-        }
-
         private void StartWave()
         {
             _enemiesPool.CreateWave(_currentWave);
@@ -87,6 +75,18 @@ namespace Code.Infrastructure.StateMachine.States
 
             UnSubscribe();
             AllEnemiesInCurrentWaveDie();
+        }
+
+        private void AllEnemiesInCurrentWaveDie()
+        {
+            if (_currentWave >= _levelConfig.Waves.Length)
+            {
+                _stateMachine.Enter<EndGameState, EndGameType>(EndGameType.Win);
+                return;
+            }
+
+            _hero.StartMove();
+            StartWave();
         }
 
         private void UnSubscribe()

@@ -5,9 +5,10 @@ namespace Code.Infrastructure.Services.Stats
 {
     public interface IStatService
     {
-        UniTask CreateStatsUI();
-        void Reset();
         event Action HpChangedHandler;
         event Action ASPDChangedHandler;
+
+        UniTask CreateStatsUI();
+        void Reset();
     }
 }

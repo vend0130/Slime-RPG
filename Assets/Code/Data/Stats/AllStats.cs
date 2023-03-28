@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Code.Data
+namespace Code.Data.Stats
 {
     [CreateAssetMenu(fileName = nameof(AllStats), menuName = "Static Data/Stats/" + nameof(AllStats))]
     public class AllStats : ScriptableObject

@@ -1,5 +1,6 @@
 ﻿using Code.Data;
 using Code.Data.PlayerProgress;
+using Code.Data.Stats;
 using Code.Infrastructure.Factories.AssetsManagement;
 using Code.Infrastructure.Factories.Enemy;
 using Code.Infrastructure.Factories.Game;
@@ -16,9 +17,7 @@ namespace Code.Infrastructure.Root.Boot
     public class BootInstaller : MonoInstaller, IInitializable
     {
         [SerializeField] private CurtainView _curtain;
-        [SerializeField] private HeroDefaultData _heroDefaultData;
         [SerializeField] private AllStats allStats;
-        [SerializeField] private string _mainSceneName = "Main";
 
         public override void InstallBindings()
         {
@@ -34,7 +33,6 @@ namespace Code.Infrastructure.Root.Boot
 
         private void BindData()
         {
-            Container.Bind<HeroDefaultData>().FromInstance(_heroDefaultData).AsSingle();
             Container.Bind<PlayerProgressData>().AsSingle();
             Container.Bind<AllStats>().FromInstance(allStats).AsSingle();
         }
@@ -62,6 +60,6 @@ namespace Code.Infrastructure.Root.Boot
         }
 
         public void Initialize() =>
-            Container.Resolve<IGameStateMachine>().Enter<LoadLevelState, string>(_mainSceneName);
+            Container.Resolve<IGameStateMachine>().Enter<LoadLevelState, string>(Constants.MainSceneName);
     }
 }

@@ -14,7 +14,7 @@ namespace Code.Game.Hero
 
         public event Action DieHandler;
 
-        private IEnemiesPoolable _enemiesPoolable;
+        private IEnemiesPoolable _enemiesPool;
         private bool _isMove;
 
         private void Update()
@@ -26,7 +26,7 @@ namespace Code.Game.Hero
         }
 
         public void InitEnemiesPool(IEnemiesPoolable enemiesPoolable) =>
-            _enemiesPoolable = enemiesPoolable;
+            _enemiesPool = enemiesPoolable;
 
         public void StartMove() =>
             _isMove = true;
@@ -42,7 +42,7 @@ namespace Code.Game.Hero
 
         private void StateAggro()
         {
-            if (!_enemiesPoolable.TryGetNearest(out Transform target))
+            if (!_enemiesPool.TryGetNearest(out Transform target))
             {
                 _rotation.Reset();
                 return;

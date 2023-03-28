@@ -1,4 +1,6 @@
-﻿namespace Code.Data.PlayerProgress
+﻿using Code.Data.Stats;
+
+namespace Code.Data.PlayerProgress
 {
     public class StatProgressData
     {
@@ -8,10 +10,8 @@
         public int Price;
         public bool IsPercents;
 
-        public StatProgressData(StatData statData)
-        {
+        public StatProgressData(StatData statData) =>
             Reset(statData);
-        }
 
         public void Reset(StatData statData)
         {
@@ -19,7 +19,7 @@
             Level = 1;
             Number = statData.DefaultNumber;
             Price = statData.DefaultPrice;
-            IsPercents = statData.IsPecents;
+            IsPercents = statData.IsPercents;
         }
     }
 }

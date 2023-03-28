@@ -1,4 +1,6 @@
-﻿namespace Code.Data.PlayerProgress
+﻿using Code.Data.Stats;
+
+namespace Code.Data.PlayerProgress
 {
     public class PlayerProgressData
     {

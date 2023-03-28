@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: _offset.y
       value: 2.3
       objectReference: {fileID: 0}
+    - target: {fileID: -8123864665897460545, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
+      propertyPath: _offsetTakeDamage.y
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 473727241135313851, guid: 960238edc2d43e941aa169b6964ab108, type: 3}
       propertyPath: m_SizeDelta.x
       value: 1.6

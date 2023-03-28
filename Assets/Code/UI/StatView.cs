@@ -13,10 +13,8 @@ namespace Code.UI
         [SerializeField] private TextMeshProUGUI _coinsText;
         [SerializeField] private GameObject _lockButton;
 
-        public void Init(string statName)
-        {
+        public void Init(string statName) =>
             _statNameText.text = statName.ToUpper();
-        }
 
         public void UpdateDate(string levelText, string number, string coins, bool isPercents)
         {

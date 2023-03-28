@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
-using Code.Data;
 using Code.Data.PlayerProgress;
+using Code.Data.Stats;
 using Code.Infrastructure.Factories.UI;
 using Code.UI;
 using Cysharp.Threading.Tasks;
@@ -144,6 +144,7 @@ namespace Code.Infrastructure.Services.Stats
             statsProgress.Number = (float)Math.Round(statsProgress.Number, 2);
 
             UpdateStat(stat, statsProgress);
+            ChangeLockStats();
         }
 
         private void ChangeLockStats()
@@ -155,11 +156,9 @@ namespace Code.Infrastructure.Services.Stats
                 stat.Item1.ChangeLock(LockButton(stat.Item2.Price));
         }
 
-        private void UpdateStat(StatView stat, StatProgressData statData)
-        {
+        private void UpdateStat(StatView stat, StatProgressData statData) =>
             stat.UpdateDate(statData.Level.ToString(), statData.Number.ToString(CultureInfo.InvariantCulture),
                 statData.Price.ToString(), statData.IsPercents);
-        }
 
         private bool LockButton(int price) =>
             price > _playerProgressData.CoinsData.CoinsCount;

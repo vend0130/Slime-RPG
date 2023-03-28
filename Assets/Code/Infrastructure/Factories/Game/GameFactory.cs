@@ -43,8 +43,11 @@ namespace Code.Infrastructure.Factories.Game
 
             var hero = _assetsProvider.Instantiate(AssetPath.HeroPath, _spawnPoint);
 
-            hero.GetComponentInChildren<HeroHealth>().Init(_uiFactory, _playerProgressData, _statService);
-            hero.GetComponent<HeroAttack>().Init(this, _playerProgressData, _statService);
+            hero.GetComponentInChildren<HeroHealth>()
+                .Init(_uiFactory, _playerProgressData, _statService);
+            
+            hero.GetComponent<HeroAttack>()
+                .Init(this, _playerProgressData, _statService);
 
             var heroComponent = hero.GetComponent<HeroComponent>();
             heroComponent.InitEnemiesPool(_enemiesPool);
@@ -72,7 +75,7 @@ namespace Code.Infrastructure.Factories.Game
             }
             else
             {
-                sphere = _spheres.GetAndDeleteElement();
+                sphere = _spheres.GetAndRemoveElement();
             }
 
             _sphereMoves.Add(sphere);

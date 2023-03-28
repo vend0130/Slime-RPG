@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Code.Data
+namespace Code.Data.Stats
 {
     [CreateAssetMenu(fileName = nameof(StatData), menuName = "Static Data/Stats/" + nameof(StatData))]
     public class StatData : ScriptableObject
@@ -11,6 +11,6 @@ namespace Code.Data
         [field: SerializeField] public float EnhanceNumber { get; private set; } = 100;
         [field: SerializeField] public int EnhancePrice { get; private set; } = 200;
         [field: SerializeField] public int MaxNumber { get; private set; } = 10;
-        [field: SerializeField] public bool IsPecents { get; private set; } = false;
+        [field: SerializeField] public bool IsPercents { get; private set; } = false;
     }
 }

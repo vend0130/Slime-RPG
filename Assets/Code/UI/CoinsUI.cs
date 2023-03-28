@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Code.Data;
+﻿using System.Collections.Generic;
 using Code.Data.PlayerProgress;
 using Code.Extensions;
 using Code.Infrastructure.Factories.UI;
@@ -43,19 +41,17 @@ namespace Code.UI
             _coinsData.ChangedHandler += ChangeCoins;
         }
 
-        public void Destroy()
-        {
+        public void Destroy() =>
             Destroy(gameObject);
-        }
 
         public void CoinsMoveToBar(List<RectTransform> coins, int coinsCount)
         {
             var sequence = DOTween.Sequence();
             _sequences.Add(sequence);
 
-            if(coins[0] == null)
+            if (coins[0] == null)
                 return;
-            
+
             sequence.Append(coins[0].DOMove(_target.position, _duration).SetEase(EaseType));
 
             for (int i = 1; i < coins.Count; i++)
@@ -65,7 +61,7 @@ namespace Code.UI
                     sequence.SimpleKill();
                     return;
                 }
-                
+
                 sequence.Join(coins[i].DOMove(_target.position, _duration).SetEase(EaseType));
             }
 
@@ -79,6 +75,6 @@ namespace Code.UI
         }
 
         private void ChangeCoins() =>
-            _coinsText.text = $"{_coinsData.CoinsCount}";
+            _coinsText.text = _coinsData.CoinsCount.ToString();
     }
 }

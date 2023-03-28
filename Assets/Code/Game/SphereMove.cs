@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Code.Data;
 using Code.Extensions;
 using Code.Infrastructure.Factories.Game;
 using DG.Tweening;
@@ -13,10 +14,9 @@ namespace Code.Game
         [SerializeField] private float _duration = .8f;
 
         private const int JumpCount = 1;
-        private const string EnemyLayerName = "Enemy";
         private const float Cleavage = .4f;
 
-        private readonly Collider[] _hits = new Collider[1];
+        private readonly Collider[] _hits = new Collider[2];
 
         private IGameFactory _gameFactory;
         private Tween _tween;
@@ -33,10 +33,13 @@ namespace Code.Game
             }
         }
 
+        private void OnDestroy() =>
+            _tween.SimpleKill();
+
         public void InitFactory(IGameFactory gameFactory)
         {
             _gameFactory = gameFactory;
-            _layerMask = 1 << LayerMask.NameToLayer(EnemyLayerName);
+            _layerMask = 1 << LayerMask.NameToLayer(Constants.EnemyLayerName);
         }
 
         public void StartMove(float damage, Vector3 startPoint, Vector3 endPoint)

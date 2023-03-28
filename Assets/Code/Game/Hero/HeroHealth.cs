@@ -1,5 +1,4 @@
-﻿using System;
-using Code.Data.PlayerProgress;
+﻿using Code.Data.PlayerProgress;
 using Code.Infrastructure.Factories.UI;
 using Code.Infrastructure.Services.Stats;
 using Code.UI;

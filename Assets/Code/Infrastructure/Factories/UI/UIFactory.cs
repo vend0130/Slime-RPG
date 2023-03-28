@@ -55,10 +55,10 @@ namespace Code.Infrastructure.Factories.UI
         {
             TakeDamageText textObject = _takeDamageTexts.Count == 0
                 ? CreateText()
-                : _takeDamageTexts.GetAndDeleteElement();
+                : _takeDamageTexts.GetAndRemoveElement();
 
-            textObject.StartEffect(ConvertWorldToCanvasPosition(worldPosition, _takeDamageUI.sizeDelta),
-                ((int)damage).ToString());
+            textObject.StartEffect(ConvertWorldToCanvasPosition(worldPosition,
+                    _takeDamageUI.sizeDelta), ((int)damage).ToString());
         }
 
         public void BackToPool(TakeDamageText text) =>
@@ -73,16 +73,15 @@ namespace Code.Infrastructure.Factories.UI
         public void CreateCoinsUI()
         {
             _coins = new List<RectTransform>();
+            
             _coinsUI = _assetsProvider
                 .Instantiate(AssetPath.CoinsUIPath, Vector3.zero)
                 .GetComponent<CoinsUI>();
 
             _coinsUI.Init(this, _progressData.CoinsData);
 
-            for (int i = 0; i < MaxDropCoins + MinDropCoins; i++)
-            {
+            for (int i = 0; i < MaxDropCoins + MinDropCoins; i++) 
                 _coins.Add(CreateCoin());
-            }
         }
 
         public void DropCoins(Vector3 worldPosition, int dropCoins)
@@ -144,7 +143,7 @@ namespace Code.Infrastructure.Factories.UI
                 return false;
             }
 
-            coin = _coins.GetAndDeleteElement();
+            coin = _coins.GetAndRemoveElement();
             return true;
         }
 

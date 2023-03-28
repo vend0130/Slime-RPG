@@ -21,7 +21,7 @@ namespace Code.Infrastructure.Factories.Enemy
         private Transform _target;
         private LevelConfig _levelConfig;
         private Transform _parent;
-        private GameObject _prefab;
+        private GameObject _enemyPrefab;
         private EnemiesSpawnPoint _spawnPoint;
         private Vector3 _nextSpawnPoint;
 
@@ -44,7 +44,7 @@ namespace Code.Infrastructure.Factories.Enemy
 
         public void Warmup()
         {
-            _prefab = _assetsProvider.Load(AssetPath.DefaultEnemyPath);
+            _enemyPrefab = _assetsProvider.Load(AssetPath.DefaultEnemyPath);
             _parent = new GameObject(EnemiesParentName).transform;
             _wavesEnemies = new List<List<EnemyComponent>>();
             CurrentWaveEnemies = new List<EnemyComponent>();
@@ -58,7 +58,7 @@ namespace Code.Infrastructure.Factories.Enemy
 
         private void CreateWavePool(int waveIndex)
         {
-            Transform waveParent = new GameObject($"{WaveName}_{waveIndex}").transform;
+            Transform waveParent = new GameObject($"{WaveName}_{waveIndex.ToString()}").transform;
             waveParent.SetParent(_parent);
 
             List<EnemyComponent> enemies = new List<EnemyComponent>(_levelConfig.Waves[waveIndex].EnemiesCount);
@@ -72,22 +72,19 @@ namespace Code.Infrastructure.Factories.Enemy
 
         private void CreateEnemy(List<EnemyComponent> enemies, Transform waveParent, int wave)
         {
-            Vector3 position = GetSpawnPoint();
-            GameObject enemy = _assetsProvider.Instantiate(_prefab, position, waveParent);
+            GameObject enemy = _assetsProvider.Instantiate(_enemyPrefab, GetSpawnPoint(), waveParent);
             enemy.SetActive(false);
 
-            enemy
-                .GetComponent<EnemyHealth>()
+            enemy.GetComponent<EnemyHealth>()
                 .Init(_uiFactory, _levelConfig.Waves[wave].EnemiesHp, _levelConfig.Waves[wave].DropCoinsCount);
 
-            enemy
-                .GetComponent<EnemyAttack>()
+            enemy.GetComponent<EnemyAttack>()
                 .ChangeDamage(_levelConfig.Waves[wave].EnemiesDamage);
 
             EnemyComponent enemyComponent = enemy.GetComponent<EnemyComponent>();
             enemyComponent.SetTarget(_target);
 
-            enemies.Add(enemy.GetComponent<EnemyComponent>());
+            enemies.Add(enemyComponent);
         }
 
         private Vector3 GetSpawnPoint()
@@ -120,6 +117,7 @@ namespace Code.Infrastructure.Factories.Enemy
             for (int i = 1; i < CurrentWaveEnemies.Count; i++)
             {
                 float newDistance = Vector3.Distance(_target.position, CurrentWaveEnemies[i].Current.position);
+
                 if (newDistance < distance)
                     target = CurrentWaveEnemies[i].Current;
             }

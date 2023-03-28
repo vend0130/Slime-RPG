@@ -1,5 +1,4 @@
-﻿using System;
-using Code.Data.PlayerProgress;
+﻿using Code.Data.PlayerProgress;
 using Code.Infrastructure.Factories.Game;
 using Code.Infrastructure.Services.Stats;
 using UnityEngine;
@@ -13,23 +12,26 @@ namespace Code.Game.Hero
         [SerializeField] private HeroComponent _heroComponent;
         [SerializeField] private Transform _sphereSpawnPoint;
         [SerializeField] private float _distanceToAttack = 7f;
-        [SerializeField] private float _cooldown = 1f; //TODO
 
+        private const float MinCooldown = .1f;
+        private const float DefaultCooldown = 1;
+
+        private float _cooldown = 1f;
         private IGameFactory _gameFactory;
         private float _timeNextAttack;
         private StatsProgressData _statsProgress;
         private IStatService _statService;
 
-        private void OnDestroy()
-        {
+        private void OnDestroy() =>
             _statService.ASPDChangedHandler -= CooldownChange;
-        }
 
         public void Init(IGameFactory gameFactory, PlayerProgressData playerProgressData, IStatService statService)
         {
             _gameFactory = gameFactory;
             _statsProgress = playerProgressData.StatsProgressData;
             _statService = statService;
+
+            _cooldown = DefaultCooldown;
 
             _statService.ASPDChangedHandler += CooldownChange;
         }
@@ -53,18 +55,17 @@ namespace Code.Game.Hero
 
             float damage = _statsProgress.AttackData.Number;
 
+            //note: 100 -> 100%
             if (Random.value < (_statsProgress.CriticalChanceData.Number / 100))
-            {
                 damage += damage * (_statsProgress.CriticalHitDamageData.Number / 100);
-            }
 
             _gameFactory.CreateSphere(damage, sphereSpawnPoint, targetPoint);
         }
 
         private void CooldownChange()
         {
-            _cooldown = 1 - (_statsProgress.ASPDData.Number - 1);
-            _cooldown = _cooldown < .1f ? .1f : _cooldown;
+            _cooldown = DefaultCooldown - (_statsProgress.ASPDData.Number - DefaultCooldown);
+            _cooldown = _cooldown < MinCooldown ? MinCooldown : _cooldown;
         }
     }
 }

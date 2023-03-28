@@ -1,4 +1,5 @@
 ﻿using System;
+using Code.Data;
 using Code.Game;
 using Code.Infrastructure.Factories.Game;
 using Code.Infrastructure.Factories.UI;
@@ -8,11 +9,11 @@ namespace Code.Infrastructure.StateMachine.States
 {
     public class EndGameState : IPayloadState<EndGameType>, IDisposable
     {
-        private readonly IUIFactory _uiFactory;
-        private readonly IGameFactory _gameFactory;
         private const string LossGameText = "YOU LOSS";
         private const string WindGameText = "YOU WIN!";
-        private const string MainSceneName = "Main";
+        
+        private readonly IUIFactory _uiFactory;
+        private readonly IGameFactory _gameFactory;
 
         private IGameStateMachine _stateMachine;
         private EndGame _endGame;
@@ -37,15 +38,13 @@ namespace Code.Infrastructure.StateMachine.States
             _endGame.AgainButton.onClick.AddListener(Again);
         }
 
-        public void Dispose()
-        {
+        public void Dispose() => 
             Exit();
-        }
 
         public void Exit() =>
             _endGame.AgainButton.onClick.RemoveListener(Again);
 
         private void Again() =>
-            _stateMachine.Enter<LoadLevelState, string>(MainSceneName);
+            _stateMachine.Enter<LoadLevelState, string>(Constants.MainSceneName);
     }
 }

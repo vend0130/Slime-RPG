@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: ASPD
   <DefaultNumber>k__BackingField: 1.01
-  <DefaultPrice>k__BackingField: 55
+  <DefaultPrice>k__BackingField: 10
   <EnhanceNumber>k__BackingField: 0.1
-  <EnhancePrice>k__BackingField: 109
+  <EnhancePrice>k__BackingField: 20
   <MaxNumber>k__BackingField: 2
-  <IsPecents>k__BackingField: 0
+  <IsPercents>k__BackingField: 0
